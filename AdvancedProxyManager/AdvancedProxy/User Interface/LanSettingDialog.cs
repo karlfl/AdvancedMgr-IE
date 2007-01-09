@@ -6,22 +6,22 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
-namespace fleischmann.advancedproxy
+namespace Fleischmann.AdvancedProxy
 {
 	/// <summary>
-	/// Copyright karl fleischmann 2006
+	/// Copyright karl fleischmann 2006-2007
 	/// </summary>
 	public partial class LanSettingDialog : Form
 	{
-		public Proxy ActiveProxy;
+		public ProxySetting ActiveProxy;
 	
 		public LanSettingDialog()
 		{
 			InitializeComponent();
-			ActiveProxy = new Proxy();
+			ActiveProxy = new ProxySetting();
 		}
 
-		public LanSettingDialog(Proxy proxy)
+		public LanSettingDialog(ProxySetting proxy)
 		{
 			InitializeComponent();
 			ActiveProxy = proxy;
@@ -58,12 +58,11 @@ namespace fleischmann.advancedproxy
 		private void btnAdvanced_Click(object sender, EventArgs e)
 		{
 			AdvancedDialog dlgAdvanced = new AdvancedDialog(ActiveProxy);
-			DialogResult result = dlgAdvanced.ShowDialog(this);
+			dlgAdvanced.ShowDialog(this);
 		}
 
 		private void btnOK_Click(object sender, EventArgs e)
 		{
-			this.DialogResult = DialogResult.OK;
 			//Update the settings and save to config file.
 			ActiveProxy.AutoDetectSettings = this.ckbAutoDetectSettings.Checked;
 			ActiveProxy.UseAutoConfigureScript = this.ckbUseAutoConfigScript.Checked;
@@ -73,12 +72,7 @@ namespace fleischmann.advancedproxy
 			ActiveProxy.UseProxyServerPort = this.txtUseProxyServerPort.Text;
 			ActiveProxy.BypassProxyForLocalAddress = this.ckbBypassProxyForLocal.Checked;
 			ActiveProxy.SaveInConfigFile();
-			this.Close();
-		}
 
-		private void btnCancel_Click(object sender, EventArgs e)
-		{
-			this.DialogResult = DialogResult.Cancel;
 			this.Close();
 		}
 	}

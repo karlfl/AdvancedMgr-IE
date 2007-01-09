@@ -4,12 +4,14 @@ using System.Configuration;
 using System.Collections.Generic;
 using System.Text;
 
-namespace fleischmann.advancedproxy
+using Fleischmann.AdvancedProxy.ProxyConfiguration;
+
+namespace Fleischmann.AdvancedProxy
 {
 	/// <summary>
-	/// Copyright karl fleischmann 2006
+	/// Copyright karl fleischmann 2006-2007
 	/// </summary>
-	public class Proxy
+	public class ProxySetting
 	{
 		const string BaseKey = "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings";
 
@@ -18,13 +20,6 @@ namespace fleischmann.advancedproxy
 		{
 			get { return _Name; }
 			set { _Name = value; }
-		}
-
-		private string _Description;
-		public string Description
-		{
-			get { return _Description; }
-			set { _Description = value; }
 		}
 
 		private bool _AutoDetectSettings;
@@ -160,25 +155,64 @@ namespace fleischmann.advancedproxy
 			set { _ExcludeAddressesFromProxy = value; }
 		}
 
-		public Proxy()
+		public ProxySetting()
 		{
 		}
 
-		public static List<Proxy> GetAllAdvancedProxies()
+		public ProxySetting(ProxyElement configElement)
 		{
-			List<Proxy> list = new List<Proxy>();
+			this.Name = configElement.Name;
+			this.AutoDetectSettings = configElement.AutoDetect;
+			this.UseAutoConfigureScript = configElement.UseAutoConfigScript;
+			this.UseAutoConfigureScriptAddress = configElement.AutoConfigScriptAddress;
+			this.UseProxyServer = configElement.UseProxyServer;
+			this.UseProxyServerAddress = configElement.UseProxyServerAddress;
+			this.BypassProxyForLocalAddress = configElement.BypassProxyForLocalAddress;
+			this.UseProxyServerPort = configElement.UseProxyServerPort;
+			this.ExcludeAddressesFromProxy = configElement.ExcludeAddressesFromProxy;
+			this.UseSameProxyServerForAllProtocols = configElement.UseSameProxyServerForAll;
+			if (configElement.ProxyURLs["HTTP"] != null)
+			{
+				this.HTTPProxyAddress = configElement.ProxyURLs["HTTP"].URL;
+				this.HTTPProxyPort = configElement.ProxyURLs["HTTP"].Port.ToString();
+			}
+			if (configElement.ProxyURLs["HTTPS"] != null)
+			{
+				this.SecureProxyAddress = configElement.ProxyURLs["HTTPS"].URL;
+				this.SecureProxyPort = configElement.ProxyURLs["HTTPS"].Port.ToString();
+			}
+			if (configElement.ProxyURLs["FTP"] != null)
+			{
+				this.FTPProxyAddress = configElement.ProxyURLs["FTP"].URL;
+				this.FTPProxyPort = configElement.ProxyURLs["FTP"].Port.ToString();
+			}
+			if (configElement.ProxyURLs["Gopher"] != null)
+			{
+				this.GopherProxyAddress = configElement.ProxyURLs["Gopher"].URL;
+				this.GopherProxyPort = configElement.ProxyURLs["Gopher"].Port.ToString();
+			}
+			if (configElement.ProxyURLs["Socks"] != null)
+			{
+				this.SocksProxyAddress = configElement.ProxyURLs["Socks"].URL;
+				this.SocksProxyPort = configElement.ProxyURLs["Socks"].Port.ToString();
+			}
+		}
+
+		public static List<ProxySetting> GetAllAdvancedProxies()
+		{
+			List<ProxySetting> list = new List<ProxySetting>();
 			return list;
 			
 		}
 
-		public static bool SetAsCurrentProxy(Proxy theProxy)
+		public static bool SetAsCurrentProxy(ProxySetting theProxy)
 		{
 			return true;
 		}
 
-		public static Proxy GetCurrentProxyFromRegistry()
+		public static ProxySetting GetCurrentProxyFromRegistry()
 		{
-			Proxy returnProxy = new Proxy();
+			ProxySetting returnProxy = new ProxySetting();
 			returnProxy.UseProxyServer = Convert.ToBoolean(Registry.GetValue(BaseKey, "ProxyEnable", false));
 			returnProxy.ExcludeAddressesFromProxy = Convert.ToString(Registry.GetValue(BaseKey, "ProxyOverride", ""));
 			if (returnProxy.ExcludeAddressesFromProxy.EndsWith("<local>"))
@@ -235,8 +269,8 @@ namespace fleischmann.advancedproxy
 					returnProxy.UseProxyServerPort = ServerAddressAndPort[1];
 				}
 
-				returnProxy.Name = "RegistryProxy";
-				returnProxy.Description = "Copy of proxy information found in current registry keys";
+				returnProxy.Name = "Initial Proxy Settings";
+				//returnProxy.Description = "Copy of proxy information found in current registry keys";
 			}
 
 			return returnProxy;
@@ -249,13 +283,85 @@ namespace fleischmann.advancedproxy
 
 		public bool SaveInConfigFile()
 		{
-//			ConfigurationManager.AppSettings.Add("ProxySettings", "MyProxySettings");
+			//Update config element values to the values on this class.
+			Configuration myConfig = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+			ProxyDefinitionSection mySection = (ProxyDefinitionSection)myConfig.GetSection("ProxyDefinition");
+			ProxyElement configElement = mySection.ProxyDefinitions[this.Name];
+			//If this name isn't found add one.
+			if (configElement == null)
+			{
+				configElement = new ProxyElement();
+				configElement.Name = this.Name;
+				mySection.ProxyDefinitions.Add(configElement);
+			}
+			configElement.Name = this.Name;
+			configElement.AutoDetect = this.AutoDetectSettings;
+			configElement.UseAutoConfigScript = this.UseAutoConfigureScript;
+			configElement.AutoConfigScriptAddress = this.UseAutoConfigureScriptAddress;
+
+			configElement.UseProxyServer = this.UseProxyServer;
+			configElement.UseProxyServerAddress = this.UseProxyServerAddress;
+			configElement.BypassProxyForLocalAddress = this.BypassProxyForLocalAddress;
+			configElement.UseProxyServerPort = this.UseProxyServerPort;
+			configElement.ExcludeAddressesFromProxy = this.ExcludeAddressesFromProxy;
+			configElement.UseSameProxyServerForAll = this.UseSameProxyServerForAllProtocols;
+
+			UpdateProxyAddressAndPort(this.HTTPProxyAddress, this.HTTPProxyPort, "HTTP", configElement);
+			UpdateProxyAddressAndPort(this.SecureProxyAddress, this.SecureProxyAddress, "HTTPS", configElement);
+			UpdateProxyAddressAndPort(this.FTPProxyAddress, this.FTPProxyPort, "FTP", configElement);
+			UpdateProxyAddressAndPort(this.GopherProxyAddress, this.GopherProxyPort, "Gopher", configElement);
+			UpdateProxyAddressAndPort(this.SocksProxyAddress, this.SocksProxyPort, "Socks", configElement);
+
+			myConfig.Save();
+
 			return true;
 		}
 
-		public Proxy Clone()
+		public bool Delete()
 		{
-			Proxy returnProxy = new Proxy();
+			//Remove this config element
+			Configuration myConfig = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+			ProxyDefinitionSection mySection = (ProxyDefinitionSection)myConfig.GetSection("ProxyDefinition");
+			mySection.ProxyDefinitions.Remove(this.Name);
+			myConfig.Save();
+
+			return true;
+		}
+
+		private void UpdateProxyAddressAndPort(string ProxyAddress, string ProxyPort, string ProxyProtocol, ProxyElement configElement)
+		{
+			if (ProxyAddress != null &&
+				ProxyAddress != string.Empty)
+			{
+				if (configElement.ProxyURLs[ProxyProtocol] != null)
+				{
+					//defined and in config file so just update it
+					ProxyAddress = configElement.ProxyURLs[ProxyProtocol].URL;
+					ProxyPort = configElement.ProxyURLs[ProxyProtocol].Port.ToString();
+				}
+				else
+				{
+					//not defined nor in config file so add it
+					ProxyURL aURL = new ProxyURL();
+					aURL.Protocol = ProxyProtocol;
+					aURL.URL = ProxyAddress;
+					aURL.Port = ProxyPort;
+					configElement.ProxyURLs.Add(aURL);
+				}
+			}
+			else
+			{
+				if (configElement.ProxyURLs[ProxyProtocol] != null)
+				{
+					//not defined but is in config file remove it
+					configElement.ProxyURLs.Remove(configElement.ProxyURLs[ProxyProtocol]);
+				}
+			}
+		}
+
+		public ProxySetting Clone()
+		{
+			ProxySetting returnProxy = new ProxySetting();
 			returnProxy.AutoDetectSettings = this.AutoDetectSettings;
 			returnProxy.BypassProxyForLocalAddress = this.BypassProxyForLocalAddress;
 			returnProxy.ExcludeAddressesFromProxy = this.ExcludeAddressesFromProxy;
@@ -266,7 +372,6 @@ namespace fleischmann.advancedproxy
 			returnProxy.HTTPProxyAddress = this.HTTPProxyAddress;
 			returnProxy.HTTPProxyPort = this.HTTPProxyPort;
 			returnProxy.Name = this.Name;
-			returnProxy.Description = this.Description;
 			returnProxy.SecureProxyAddress = this.SecureProxyAddress;
 			returnProxy.SecureProxyPort = this.SecureProxyPort;
 			returnProxy.SocksProxyAddress = this.SocksProxyAddress;

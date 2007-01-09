@@ -1,4 +1,4 @@
-namespace fleischmann.advancedproxy
+namespace Fleischmann.AdvancedProxy
 {
 	partial class AdvancedDialog
 	{
@@ -342,10 +342,10 @@ namespace fleischmann.advancedproxy
 			this.btnCancel.TabIndex = 6;
 			this.btnCancel.Text = "Cancel";
 			this.btnCancel.UseVisualStyleBackColor = true;
-			this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
 			// 
 			// btnOK
 			// 
+			this.btnOK.DialogResult = System.Windows.Forms.DialogResult.OK;
 			this.btnOK.Location = new System.Drawing.Point(178, 310);
 			this.btnOK.Name = "btnOK";
 			this.btnOK.Size = new System.Drawing.Size(75, 23);
@@ -361,6 +361,7 @@ namespace fleischmann.advancedproxy
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.CancelButton = this.btnCancel;
 			this.ClientSize = new System.Drawing.Size(352, 338);
+			this.ControlBox = false;
 			this.Controls.Add(this.btnCancel);
 			this.Controls.Add(this.btnOK);
 			this.Controls.Add(this.gbxExceptions);
@@ -370,6 +371,8 @@ namespace fleischmann.advancedproxy
 			this.MinimizeBox = false;
 			this.Name = "AdvancedDialog";
 			this.ShowIcon = false;
+			this.ShowInTaskbar = false;
+			this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
 			this.Text = "Proxy Settings";
 			this.Load += new System.EventHandler(this.AdvancedDialog_Load);
 			this.gbxServers.ResumeLayout(false);

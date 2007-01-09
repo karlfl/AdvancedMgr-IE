@@ -6,21 +6,21 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
-namespace fleischmann.advancedproxy
+namespace Fleischmann.AdvancedProxy
 {
 	/// <summary>
-	/// Copyright karl fleischmann 2006
+	/// Copyright karl fleischmann 2006-2007
 	/// </summary>
 	public partial class AdvancedDialog : Form
 	{
-		public Proxy ActiveProxy;
+		public ProxySetting ActiveProxy;
 		public AdvancedDialog()
 		{
 			InitializeComponent();
-			ActiveProxy = new Proxy();
+			ActiveProxy = new ProxySetting();
 		}
 
-		public AdvancedDialog(Proxy proxy)
+		public AdvancedDialog(ProxySetting proxy)
 		{
 			InitializeComponent();
 			this.ActiveProxy = proxy;
@@ -90,7 +90,6 @@ namespace fleischmann.advancedproxy
 
 		private void btnOK_Click(object sender, EventArgs e)
 		{
-			this.DialogResult = DialogResult.OK;
 			ActiveProxy.HTTPProxyAddress = this.txtHttpAddress.Text;
 			ActiveProxy.HTTPProxyPort = this.txtHttpPort.Text;
 			ActiveProxy.SecureProxyAddress = this.txtSecureAddress.Text;
@@ -103,13 +102,6 @@ namespace fleischmann.advancedproxy
 			ActiveProxy.SocksProxyPort = this.txtSocksPort.Text;
 			ActiveProxy.UseSameProxyServerForAllProtocols = this.ckbSameProxyForAll.Checked;
 			ActiveProxy.ExcludeAddressesFromProxy = this.txtExcludeAddresses.Text;
-			this.Close();
-		}
-
-		private void btnCancel_Click(object sender, EventArgs e)
-		{
-			this.DialogResult = DialogResult.Cancel;
-			this.Close();
 		}
 	}
 }

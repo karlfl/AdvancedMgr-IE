@@ -7,7 +7,7 @@
     <ProjectGuid>{D946F883-295B-4371-B022-42F72DB375F5}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>fleischmann.advancedproxy</RootNamespace>
+    <RootNamespace>Fleischmann.AdvancedProxy</RootNamespace>
     <AssemblyName>AdvancedProxyManager</AssemblyName>
     <SccProjectName>SAK</SccProjectName>
     <SccLocalPath>SAK</SccLocalPath>
@@ -22,6 +22,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -41,6 +42,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Class Files\Configuration\ProxyURLCollection.cs" />
+    <Compile Include="Class Files\Configuration\ProxyDefinitionSection.cs" />
+    <Compile Include="Class Files\Configuration\ProxyElement.cs" />
+    <Compile Include="Class Files\ProxyConfigFile.cs" />
+    <Compile Include="Class Files\Configuration\ProxyElementCollection.cs" />
+    <Compile Include="Class Files\ProxySettingGroup.cs" />
+    <Compile Include="Class Files\Configuration\ProxyURL.cs" />
     <Compile Include="User Interface\AdvancedDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -78,12 +86,17 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="User Interface\ProxyNamePromptDialog.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ProxyNamePromptDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <None Include="App.config" />
+    <None Include="App.config">
+    </None>
     <None Include="ClassDiagram.cd" />
     <None Include="Properties\DataSources\fleischmann.advancedproxy.Proxy.datasource" />
     <None Include="Properties\DataSources\fleischmann.advancedproxy.Proxy1.datasource" />
@@ -96,7 +109,13 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Class Files\Proxy.cs" />
+    <Compile Include="Class Files\ProxySetting.cs" />
+    <Compile Include="User Interface\ProxyNamePromptDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="User Interface\ProxyNamePromptDialog.Designer.cs">
+      <DependentUpon>ProxyNamePromptDialog.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

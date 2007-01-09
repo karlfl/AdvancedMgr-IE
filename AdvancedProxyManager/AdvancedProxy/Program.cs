@@ -3,12 +3,14 @@ using System.Configuration;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace fleischmann.advancedproxy
+using Fleischmann.AdvancedProxy.ProxyConfiguration;
+
+namespace Fleischmann.AdvancedProxy
 {
 	static class Program
 	{
 		/// <summary>
-		/// Copyright karl fleischmann 2006
+		/// Copyright karl fleischmann 2006-2007
 		///
 		/// The main entry point for the application.
 		/// </summary>
@@ -17,15 +19,20 @@ namespace fleischmann.advancedproxy
 		{
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
-			Proxy aProxy = Proxy.GetCurrentProxyFromRegistry();
-			List<Proxy> proxyList = new List<Proxy>();
-			proxyList.Add(aProxy);
+
+			List<ProxySetting> proxyList = new List<ProxySetting>();
+
+			//Get all proxies defined in the config file.
+			ProxyDefinitionSection section = (ProxyDefinitionSection)ConfigurationManager.GetSection("ProxyDefinition");
+			if (section.ProxyDefinitions != null)
+			{
+				foreach (ProxyElement proxyElement in section.ProxyDefinitions)
+				{
+					proxyList.Add(new ProxySetting(proxyElement));
+				}
+			}
+			
 			Application.Run(new MainForm(proxyList));
 		}
-
-		//static List<Proxy> GetProxySettingsFromConfig()
-		//{
-		//    ConfigurationSettings.AppSettings.Get(
-		//}
 	}
 }

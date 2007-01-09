@@ -1,4 +1,4 @@
-namespace fleischmann.advancedproxy
+namespace Fleischmann.AdvancedProxy
 {
 	partial class LanSettingDialog
 	{
@@ -126,7 +126,6 @@ namespace fleischmann.advancedproxy
 			// 
 			// btnAdvanced
 			// 
-			this.btnAdvanced.DialogResult = System.Windows.Forms.DialogResult.Cancel;
 			this.btnAdvanced.Location = new System.Drawing.Point(258, 60);
 			this.btnAdvanced.Name = "btnAdvanced";
 			this.btnAdvanced.Size = new System.Drawing.Size(75, 23);
@@ -190,7 +189,7 @@ namespace fleischmann.advancedproxy
 			// 
 			// btnOK
 			// 
-			this.btnOK.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+			this.btnOK.DialogResult = System.Windows.Forms.DialogResult.OK;
 			this.btnOK.Location = new System.Drawing.Point(201, 285);
 			this.btnOK.Name = "btnOK";
 			this.btnOK.Size = new System.Drawing.Size(75, 23);
@@ -208,7 +207,6 @@ namespace fleischmann.advancedproxy
 			this.btnCancel.TabIndex = 3;
 			this.btnCancel.Text = "Cancel";
 			this.btnCancel.UseVisualStyleBackColor = true;
-			this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
 			// 
 			// LanSettingDialog
 			// 
@@ -217,6 +215,7 @@ namespace fleischmann.advancedproxy
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.CancelButton = this.btnCancel;
 			this.ClientSize = new System.Drawing.Size(369, 321);
+			this.ControlBox = false;
 			this.Controls.Add(this.btnCancel);
 			this.Controls.Add(this.btnOK);
 			this.Controls.Add(this.gbxProxyServer);
@@ -226,6 +225,8 @@ namespace fleischmann.advancedproxy
 			this.MinimizeBox = false;
 			this.Name = "LanSettingDialog";
 			this.ShowIcon = false;
+			this.ShowInTaskbar = false;
+			this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
 			this.Text = "Local Area Network (LAN) Settings";
 			this.Load += new System.EventHandler(this.LanSettingDialog_Load);
 			this.gbxAutomaticConfiguration.ResumeLayout(false);
