@@ -3,15 +3,20 @@ Microsoft Visual Studio Solution File, Format Version 9.00
 # Visual Studio 2005
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdvancedProxy", "AdvancedProxy\AdvancedProxy.csproj", "{D946F883-295B-4371-B022-42F72DB375F5}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Advanced Proxy Manager Setup", "Advanced Proxy Setup\Advanced Proxy Setup.vdproj", "{E975D919-DF36-4832-AA80-E113387BFC99}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 2
+		SccNumberOfProjects = 3
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://tfs01.codeplex.com/
 		SccLocalPath0 = .
 		SccProjectUniqueName1 = AdvancedProxy\\AdvancedProxy.csproj
 		SccProjectName1 = AdvancedProxy
 		SccLocalPath1 = AdvancedProxy
+		SccProjectUniqueName2 = Advanced\u0020Proxy\u0020Setup\\Advanced\u0020Proxy\u0020Setup.vdproj
+		SccProjectName2 = Advanced\u0020Proxy\u0020Setup
+		SccLocalPath2 = Advanced\u0020Proxy\u0020Setup
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -22,6 +27,8 @@ Global
 		{D946F883-295B-4371-B022-42F72DB375F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D946F883-295B-4371-B022-42F72DB375F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D946F883-295B-4371-B022-42F72DB375F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E975D919-DF36-4832-AA80-E113387BFC99}.Debug|Any CPU.ActiveCfg = Debug
+		{E975D919-DF36-4832-AA80-E113387BFC99}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

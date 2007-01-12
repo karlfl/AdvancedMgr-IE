@@ -1,3 +1,11 @@
+// Project: AdvancedProxy, File: ProxySetting.cs
+// Namespace: Fleischmann.AdvancedProxy, Class: ProxySetting
+// Path: D:\My Documents\Visual Studio 2005\Projects\AdvancedProxy\AdvancedProxy\Class Files, Author: rzd7jx
+// Code lines: 475, Size of file: 15.49 KB
+// Creation date: 12/30/2006 11:39 AM
+// Last modified: 1/11/2007 9:24 PM
+// Generated with Commenter by abi.exDream.com
+
 using Microsoft.Win32;
 using System;
 using System.Configuration;
@@ -13,7 +21,7 @@ namespace Fleischmann.AdvancedProxy
 	/// </summary>
 	public class ProxySetting
 	{
-		const string BaseKey = "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings";
+		private const string BaseKey = "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings";
 
 		private string _Name;
 		public string Name
@@ -235,28 +243,28 @@ namespace Fleischmann.AdvancedProxy
 					{
 						string[] proxyServer = aProxyServer.Split('=');
 						string type = proxyServer[0];
-						string[] ServerAddressAndPort = proxyServer[1].Split(':');
+						string[] serverAddressAndPort = proxyServer[1].Split(':');
 						switch (type)
 						{
 							case ("http"):
-								returnProxy.HTTPProxyAddress = ServerAddressAndPort[0];
-								returnProxy.HTTPProxyPort = ServerAddressAndPort[1];
+								returnProxy.HTTPProxyAddress = serverAddressAndPort[0];
+								returnProxy.HTTPProxyPort = serverAddressAndPort[1];
 								break;
 							case ("https"):
-								returnProxy.SecureProxyAddress = ServerAddressAndPort[0];
-								returnProxy.SecureProxyPort = ServerAddressAndPort[1];
+								returnProxy.SecureProxyAddress = serverAddressAndPort[0];
+								returnProxy.SecureProxyPort = serverAddressAndPort[1];
 								break;
 							case ("ftp"):
-								returnProxy.FTPProxyAddress = ServerAddressAndPort[0];
-								returnProxy.FTPProxyPort = ServerAddressAndPort[1];
+								returnProxy.FTPProxyAddress = serverAddressAndPort[0];
+								returnProxy.FTPProxyPort = serverAddressAndPort[1];
 								break;
 							case ("gopher"):
-								returnProxy.GopherProxyAddress = ServerAddressAndPort[0];
-								returnProxy.GopherProxyPort = ServerAddressAndPort[1];
+								returnProxy.GopherProxyAddress = serverAddressAndPort[0];
+								returnProxy.GopherProxyPort = serverAddressAndPort[1];
 								break;
 							case ("socks"):
-								returnProxy.SocksProxyAddress = ServerAddressAndPort[0];
-								returnProxy.SocksProxyPort = ServerAddressAndPort[1];
+								returnProxy.SocksProxyAddress = serverAddressAndPort[0];
+								returnProxy.SocksProxyPort = serverAddressAndPort[1];
 								break;
 						}
 					}
@@ -264,9 +272,9 @@ namespace Fleischmann.AdvancedProxy
 				else
 				{
 					returnProxy.UseSameProxyServerForAllProtocols = true;
-					string[] ServerAddressAndPort = proxyServerString.Split(':');
-					returnProxy.UseProxyServerAddress = ServerAddressAndPort[0];
-					returnProxy.UseProxyServerPort = ServerAddressAndPort[1];
+					string[] serverAddressAndPort = proxyServerString.Split(':');
+					returnProxy.UseProxyServerAddress = serverAddressAndPort[0];
+					returnProxy.UseProxyServerPort = serverAddressAndPort[1];
 				}
 
 				returnProxy.Name = "Initial Proxy Settings";
@@ -278,7 +286,52 @@ namespace Fleischmann.AdvancedProxy
 
 		public bool SetAsCurrentProxy()
 		{
+			Registry.SetValue(BaseKey, "ProxyEnable", this.UseProxyServer);
+			Registry.SetValue(BaseKey, "ProxyOverride", this.ExcludeAddressesFromProxy);
+
+			StringBuilder proxyString = new StringBuilder();
+			if (HTTPProxyAddress != string.Empty)
+			{
+				buildProxyString(proxyString, "http", HTTPProxyAddress, HTTPProxyPort);
+			}
+			if (!UseSameProxyServerForAllProtocols)
+			{
+				if (SecureProxyAddress != string.Empty)
+				{
+					buildProxyString(proxyString, "https", SecureProxyAddress, SecureProxyPort);
+				}
+				if (FTPProxyAddress != string.Empty)
+				{
+					buildProxyString(proxyString, "ftp", FTPProxyAddress, FTPProxyPort);
+				}
+				if (GopherProxyAddress != string.Empty)
+				{
+					buildProxyString(proxyString, "gopher", GopherProxyAddress, GopherProxyPort);
+				}
+				if (SocksProxyAddress != string.Empty)
+				{
+					buildProxyString(proxyString, "socks", SocksProxyAddress, SocksProxyPort);
+				}
+			}
+
+			if (BypassProxyForLocalAddress)
+			{
+				proxyString.Append(";<local>");
+			}
+
+			Registry.SetValue(BaseKey, "ProxyServer", proxyString.ToString());
+
+
 			return true;
+		}
+
+		private void buildProxyString(StringBuilder proxyString, string proxyType, string proxyAddress, string proxyPort)
+		{
+			if (proxyString.Length > 0)
+			{
+				proxyString.Append(";");
+			}
+			proxyString.Append(proxyType).Append("=").Append(proxyAddress).Append(":").Append(proxyAddress);
 		}
 
 		public bool SaveInConfigFile()
@@ -399,6 +452,11 @@ namespace Fleischmann.AdvancedProxy
 		public static void modifyUseProxy(bool newValue)
 		{
 			Registry.SetValue(BaseKey,"ProxyEnable", Convert.ToInt32(newValue),RegistryValueKind.DWord);
+		}
+
+		public static bool GetUseProxy()
+		{
+			return Convert.ToBoolean(Registry.GetValue(BaseKey, "ProxyEnable", false));
 		}
 
 	}

@@ -1,3 +1,11 @@
+// Project: AdvancedProxy, File: MainForm.cs
+// Namespace: Fleischmann.AdvancedProxy, Class: MainForm
+// Path: D:\My Documents\Visual Studio 2005\Projects\AdvancedProxy\AdvancedProxy\User Interface, Author: rzd7jx
+// Code lines: 170, Size of file: 5.02 KB
+// Creation date: 12/30/2006 11:40 AM
+// Last modified: 1/11/2007 12:22 PM
+// Generated with Commenter by abi.exDream.com
+
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,22 +21,21 @@ namespace Fleischmann.AdvancedProxy
 	/// </summary>
 	public partial class MainForm : Form
 	{
-		bool applicationExiting = false;
-
-		List<ProxySetting> proxyList;
+		private bool _applicationExiting = false;
+		private List<ProxySetting> _proxyList;
 
 		public MainForm(List<ProxySetting> theProxyList)
 		{
 			InitializeComponent();
-			proxyList = theProxyList;
-			this.proxyBindingSource.DataSource = proxyList;
+			_proxyList = theProxyList;
+			this.proxyBindingSource.DataSource = _proxyList;
 		}
 
 		private void MainForm_Load(object sender, EventArgs e)
 		{
-			if (proxyList.Count == 0)
+			if (_proxyList.Count == 0)
 			{
-				DialogResult result = MessageBox.Show("You currently have no Proxy Settings defined.  Would you like to create an initial settings based on your current proxy settings in Internet Explorer?", "Create Initial Proxy Set", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
+				DialogResult result = MessageBox.Show("You currently have no Proxy Settings defined.  /n Would you like to create an initial settings based on your current proxy settings in Internet Explorer?", "Create Initial Proxy Set", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
 				if (result == DialogResult.Yes)
 				{
 					ProxySetting currentRegistryProxy = ProxySetting.GetCurrentProxyFromRegistry();
@@ -39,8 +46,8 @@ namespace Fleischmann.AdvancedProxy
 					{
 						currentRegistryProxy.Name = dlgNamePrompt.txtName.Text;
 						currentRegistryProxy.SaveInConfigFile();
-						proxyList.Add(currentRegistryProxy);
-						this.gridProxySettings.DataSource = proxyList;
+						_proxyList.Add(currentRegistryProxy);
+						this.gridProxySettings.DataSource = _proxyList;
 						this.gridProxySettings.Refresh();
 					}
 				}
@@ -60,7 +67,7 @@ namespace Fleischmann.AdvancedProxy
 
 		private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
 		{
-			if (!applicationExiting)
+			if (!_applicationExiting)
 			{
 				DialogResult result = MessageBox.Show("Minimize to System Tray?", "Closing = Advanced Proxy Configure", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 				if (result == DialogResult.Yes)
@@ -81,7 +88,7 @@ namespace Fleischmann.AdvancedProxy
 
 		private void exitToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			applicationExiting = true;
+			_applicationExiting = true;
 			Application.Exit();
 		}
 
@@ -99,8 +106,8 @@ namespace Fleischmann.AdvancedProxy
 				if (result == DialogResult.OK)
 				{
 					//don't add it until they've entered the data for it and saved it.
-					proxyList.Add(newProxy);
-					this.gridProxySettings.DataSource = proxyList;
+					_proxyList.Add(newProxy);
+					this.gridProxySettings.DataSource = _proxyList;
 					this.gridProxySettings.Refresh();
 				}
 			}
@@ -120,8 +127,8 @@ namespace Fleischmann.AdvancedProxy
 				{
 					this.gridProxySettings.DataSource = null;
 					selectedProxy.Delete();
-					proxyList.Remove(selectedProxy);
-					this.gridProxySettings.DataSource = proxyList;
+					_proxyList.Remove(selectedProxy);
+					this.gridProxySettings.DataSource = _proxyList;
 					this.gridProxySettings.Refresh();
 				}
 		}
@@ -145,6 +152,40 @@ namespace Fleischmann.AdvancedProxy
 			{
 				this.gridProxySettings.Refresh();
 			}
+		}
+
+		private void cxmNotifyIconMenu_Opening(object sender, CancelEventArgs e)
+		{
+			//First Clear the list.
+			setCurrentProxyToolStripMenuItem.DropDownItems.Clear();
+
+		    foreach (ProxySetting aProxy in _proxyList)
+		    {
+		        ToolStripItem proxyMenuItem = setCurrentProxyToolStripMenuItem.DropDownItems.Add(aProxy.Name);
+				proxyMenuItem.Click += new System.EventHandler(this.proxyMenuItem_Click);
+		    }
+
+			useProxyToolStripMenuItem.Checked = ProxySetting.GetUseProxy();
+
+		}
+
+		private void proxyMenuItem_Click(object sender, EventArgs e)
+		{
+			foreach (ProxySetting aproxy in _proxyList)
+			{
+				if (aproxy.Name == ((ToolStripItem)sender).Text)
+				{
+					aproxy.SetAsCurrentProxy();
+
+				}
+			}
+		}
+
+		private void btnSetAsCurrent_Click(object sender, EventArgs e)
+		{
+			ProxySetting selectedProxy = (ProxySetting)this.gridProxySettings.SelectedRows[0].DataBoundItem;
+			selectedProxy.SetAsCurrentProxy();
+
 		}
 
 	}

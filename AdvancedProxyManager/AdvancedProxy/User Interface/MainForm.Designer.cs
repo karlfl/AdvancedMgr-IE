@@ -33,17 +33,6 @@ namespace Fleischmann.AdvancedProxy
 			this.gridProxySettings = new System.Windows.Forms.DataGridView();
 			this.ProxyConfigName = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.ProxyConfigDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.icnProxyNotifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
-			this.cxmNotifyIconMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
-			this.configureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.useProxyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-			this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.btnEdit = new System.Windows.Forms.Button();
-			this.btnSetAsCurrent = new System.Windows.Forms.Button();
-			this.btnExit = new System.Windows.Forms.Button();
-			this.btnDelete = new System.Windows.Forms.Button();
-			this.btnAdd = new System.Windows.Forms.Button();
 			this.autoDetectSettingsDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
 			this.useAutoConfigureScriptDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
 			this.useAutoConfigureScriptAddressDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -64,9 +53,22 @@ namespace Fleischmann.AdvancedProxy
 			this.useSameProxyServerForAllProtocolsDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
 			this.excludeAddressesFromProxyDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.proxyBindingSource = new System.Windows.Forms.BindingSource(this.components);
+			this.icnProxyNotifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
+			this.cxmNotifyIconMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+			this.configureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.setCurrentProxyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.useProxyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+			this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.btnEdit = new System.Windows.Forms.Button();
+			this.btnSetAsCurrent = new System.Windows.Forms.Button();
+			this.btnExit = new System.Windows.Forms.Button();
+			this.btnDelete = new System.Windows.Forms.Button();
+			this.btnAdd = new System.Windows.Forms.Button();
+			this.firstProxyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			((System.ComponentModel.ISupportInitialize)(this.gridProxySettings)).BeginInit();
-			this.cxmNotifyIconMenu.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.proxyBindingSource)).BeginInit();
+			this.cxmNotifyIconMenu.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// gridProxySettings
@@ -126,108 +128,6 @@ namespace Fleischmann.AdvancedProxy
 			this.ProxyConfigDescription.Name = "ProxyConfigDescription";
 			this.ProxyConfigDescription.ReadOnly = true;
 			this.ProxyConfigDescription.Visible = false;
-			// 
-			// icnProxyNotifyIcon
-			// 
-			this.icnProxyNotifyIcon.BalloonTipIcon = System.Windows.Forms.ToolTipIcon.Info;
-			this.icnProxyNotifyIcon.BalloonTipText = "Easily control all of Internet Explorer\'s Proxy Settings.";
-			this.icnProxyNotifyIcon.BalloonTipTitle = "Anvanced Proxy Configurations";
-			this.icnProxyNotifyIcon.ContextMenuStrip = this.cxmNotifyIconMenu;
-			this.icnProxyNotifyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("icnProxyNotifyIcon.Icon")));
-			this.icnProxyNotifyIcon.Text = "ProxyNotifyIcon";
-			this.icnProxyNotifyIcon.Visible = true;
-			this.icnProxyNotifyIcon.DoubleClick += new System.EventHandler(this.icnProxyNotifyIcon_DoubleClick);
-			// 
-			// cxmNotifyIconMenu
-			// 
-			this.cxmNotifyIconMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.configureToolStripMenuItem,
-            this.useProxyToolStripMenuItem,
-            this.toolStripSeparator1,
-            this.exitToolStripMenuItem});
-			this.cxmNotifyIconMenu.Name = "cxmNotifyIconMenu";
-			this.cxmNotifyIconMenu.Size = new System.Drawing.Size(181, 76);
-			// 
-			// configureToolStripMenuItem
-			// 
-			this.configureToolStripMenuItem.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-			this.configureToolStripMenuItem.Name = "configureToolStripMenuItem";
-			this.configureToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-			this.configureToolStripMenuItem.Text = "Edit Configurations";
-			this.configureToolStripMenuItem.Click += new System.EventHandler(this.configureToolStripMenuItem_Click);
-			// 
-			// useProxyToolStripMenuItem
-			// 
-			this.useProxyToolStripMenuItem.Name = "useProxyToolStripMenuItem";
-			this.useProxyToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-			this.useProxyToolStripMenuItem.Text = "Use Proxy";
-			this.useProxyToolStripMenuItem.Click += new System.EventHandler(this.useProxyToolStripMenuItem_Click);
-			// 
-			// toolStripSeparator1
-			// 
-			this.toolStripSeparator1.Name = "toolStripSeparator1";
-			this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
-			// 
-			// exitToolStripMenuItem
-			// 
-			this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-			this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-			this.exitToolStripMenuItem.Text = "Exit";
-			this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
-			// 
-			// btnEdit
-			// 
-			this.btnEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.btnEdit.Location = new System.Drawing.Point(69, 261);
-			this.btnEdit.Name = "btnEdit";
-			this.btnEdit.Size = new System.Drawing.Size(47, 23);
-			this.btnEdit.TabIndex = 1;
-			this.btnEdit.Text = "Edit";
-			this.btnEdit.UseVisualStyleBackColor = true;
-			this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
-			// 
-			// btnSetAsCurrent
-			// 
-			this.btnSetAsCurrent.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.btnSetAsCurrent.Location = new System.Drawing.Point(180, 261);
-			this.btnSetAsCurrent.Name = "btnSetAsCurrent";
-			this.btnSetAsCurrent.Size = new System.Drawing.Size(95, 23);
-			this.btnSetAsCurrent.TabIndex = 2;
-			this.btnSetAsCurrent.Text = "Set As Current";
-			this.btnSetAsCurrent.UseVisualStyleBackColor = true;
-			// 
-			// btnExit
-			// 
-			this.btnExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnExit.Location = new System.Drawing.Point(280, 261);
-			this.btnExit.Name = "btnExit";
-			this.btnExit.Size = new System.Drawing.Size(49, 23);
-			this.btnExit.TabIndex = 3;
-			this.btnExit.Text = "Exit";
-			this.btnExit.UseVisualStyleBackColor = true;
-			this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
-			// 
-			// btnDelete
-			// 
-			this.btnDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.btnDelete.Location = new System.Drawing.Point(121, 261);
-			this.btnDelete.Name = "btnDelete";
-			this.btnDelete.Size = new System.Drawing.Size(52, 23);
-			this.btnDelete.TabIndex = 4;
-			this.btnDelete.Text = "Delete";
-			this.btnDelete.UseVisualStyleBackColor = true;
-			this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
-			// 
-			// btnAdd
-			// 
-			this.btnAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.btnAdd.Location = new System.Drawing.Point(11, 261);
-			this.btnAdd.Name = "btnAdd";
-			this.btnAdd.Size = new System.Drawing.Size(52, 23);
-			this.btnAdd.TabIndex = 5;
-			this.btnAdd.Text = "Add";
-			this.btnAdd.UseVisualStyleBackColor = true;
-			this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
 			// 
 			// autoDetectSettingsDataGridViewCheckBoxColumn
 			// 
@@ -385,6 +285,125 @@ namespace Fleischmann.AdvancedProxy
 			// 
 			this.proxyBindingSource.DataSource = typeof(Fleischmann.AdvancedProxy.ProxySetting);
 			// 
+			// icnProxyNotifyIcon
+			// 
+			this.icnProxyNotifyIcon.BalloonTipIcon = System.Windows.Forms.ToolTipIcon.Info;
+			this.icnProxyNotifyIcon.BalloonTipText = "Easily control all of Internet Explorer\'s Proxy Settings.";
+			this.icnProxyNotifyIcon.BalloonTipTitle = "Anvanced Proxy Configurations";
+			this.icnProxyNotifyIcon.ContextMenuStrip = this.cxmNotifyIconMenu;
+			this.icnProxyNotifyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("icnProxyNotifyIcon.Icon")));
+			this.icnProxyNotifyIcon.Text = "ProxyNotifyIcon";
+			this.icnProxyNotifyIcon.Visible = true;
+			this.icnProxyNotifyIcon.DoubleClick += new System.EventHandler(this.icnProxyNotifyIcon_DoubleClick);
+			// 
+			// cxmNotifyIconMenu
+			// 
+			this.cxmNotifyIconMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.configureToolStripMenuItem,
+            this.setCurrentProxyToolStripMenuItem,
+            this.useProxyToolStripMenuItem,
+            this.toolStripSeparator1,
+            this.exitToolStripMenuItem});
+			this.cxmNotifyIconMenu.Name = "cxmNotifyIconMenu";
+			this.cxmNotifyIconMenu.Size = new System.Drawing.Size(181, 120);
+			this.cxmNotifyIconMenu.Opening += new System.ComponentModel.CancelEventHandler(this.cxmNotifyIconMenu_Opening);
+			// 
+			// configureToolStripMenuItem
+			// 
+			this.configureToolStripMenuItem.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+			this.configureToolStripMenuItem.Name = "configureToolStripMenuItem";
+			this.configureToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.configureToolStripMenuItem.Text = "Edit Configurations";
+			this.configureToolStripMenuItem.Click += new System.EventHandler(this.configureToolStripMenuItem_Click);
+			// 
+			// setCurrentProxyToolStripMenuItem
+			// 
+			this.setCurrentProxyToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.firstProxyToolStripMenuItem});
+			this.setCurrentProxyToolStripMenuItem.Name = "setCurrentProxyToolStripMenuItem";
+			this.setCurrentProxyToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.setCurrentProxyToolStripMenuItem.Text = "Set Current Proxy";
+			// 
+			// useProxyToolStripMenuItem
+			// 
+			this.useProxyToolStripMenuItem.Name = "useProxyToolStripMenuItem";
+			this.useProxyToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.useProxyToolStripMenuItem.Text = "Use Proxy";
+			this.useProxyToolStripMenuItem.Click += new System.EventHandler(this.useProxyToolStripMenuItem_Click);
+			// 
+			// toolStripSeparator1
+			// 
+			this.toolStripSeparator1.Name = "toolStripSeparator1";
+			this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
+			// 
+			// exitToolStripMenuItem
+			// 
+			this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+			this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.exitToolStripMenuItem.Text = "Exit";
+			this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+			// 
+			// btnEdit
+			// 
+			this.btnEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.btnEdit.Location = new System.Drawing.Point(69, 261);
+			this.btnEdit.Name = "btnEdit";
+			this.btnEdit.Size = new System.Drawing.Size(47, 23);
+			this.btnEdit.TabIndex = 1;
+			this.btnEdit.Text = "Edit";
+			this.btnEdit.UseVisualStyleBackColor = true;
+			this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
+			// 
+			// btnSetAsCurrent
+			// 
+			this.btnSetAsCurrent.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.btnSetAsCurrent.Location = new System.Drawing.Point(180, 261);
+			this.btnSetAsCurrent.Name = "btnSetAsCurrent";
+			this.btnSetAsCurrent.Size = new System.Drawing.Size(95, 23);
+			this.btnSetAsCurrent.TabIndex = 2;
+			this.btnSetAsCurrent.Text = "Set As Current";
+			this.btnSetAsCurrent.UseVisualStyleBackColor = true;
+			this.btnSetAsCurrent.Click += new System.EventHandler(this.btnSetAsCurrent_Click);
+			// 
+			// btnExit
+			// 
+			this.btnExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnExit.Location = new System.Drawing.Point(280, 261);
+			this.btnExit.Name = "btnExit";
+			this.btnExit.Size = new System.Drawing.Size(49, 23);
+			this.btnExit.TabIndex = 3;
+			this.btnExit.Text = "Exit";
+			this.btnExit.UseVisualStyleBackColor = true;
+			this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
+			// 
+			// btnDelete
+			// 
+			this.btnDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.btnDelete.Location = new System.Drawing.Point(121, 261);
+			this.btnDelete.Name = "btnDelete";
+			this.btnDelete.Size = new System.Drawing.Size(52, 23);
+			this.btnDelete.TabIndex = 4;
+			this.btnDelete.Text = "Delete";
+			this.btnDelete.UseVisualStyleBackColor = true;
+			this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+			// 
+			// btnAdd
+			// 
+			this.btnAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.btnAdd.Location = new System.Drawing.Point(11, 261);
+			this.btnAdd.Name = "btnAdd";
+			this.btnAdd.Size = new System.Drawing.Size(52, 23);
+			this.btnAdd.TabIndex = 5;
+			this.btnAdd.Text = "Add";
+			this.btnAdd.UseVisualStyleBackColor = true;
+			this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+			// 
+			// firstProxyToolStripMenuItem
+			// 
+			this.firstProxyToolStripMenuItem.Name = "firstProxyToolStripMenuItem";
+			this.firstProxyToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.firstProxyToolStripMenuItem.Text = "FirstProxy";
+			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -405,8 +424,8 @@ namespace Fleischmann.AdvancedProxy
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
 			this.Load += new System.EventHandler(this.MainForm_Load);
 			((System.ComponentModel.ISupportInitialize)(this.gridProxySettings)).EndInit();
-			this.cxmNotifyIconMenu.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.proxyBindingSource)).EndInit();
+			this.cxmNotifyIconMenu.ResumeLayout(false);
 			this.ResumeLayout(false);
 
 		}
@@ -447,6 +466,8 @@ namespace Fleischmann.AdvancedProxy
 		private System.Windows.Forms.DataGridViewTextBoxColumn excludeAddressesFromProxyDataGridViewTextBoxColumn;
 		private System.Windows.Forms.Button btnDelete;
 		private System.Windows.Forms.Button btnAdd;
+		private System.Windows.Forms.ToolStripMenuItem setCurrentProxyToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem firstProxyToolStripMenuItem;
 
 	}
 }
