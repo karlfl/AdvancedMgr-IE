@@ -3,7 +3,7 @@
 // Path: D:\My Documents\Visual Studio 2005\Projects\AdvancedProxy\AdvancedProxy\Class Files, Author: rzd7jx
 // Code lines: 475, Size of file: 15.49 KB
 // Creation date: 12/30/2006 11:39 AM
-// Last modified: 1/11/2007 9:24 PM
+// Last modified: 1/12/2007 7:28 AM
 // Generated with Commenter by abi.exDream.com
 
 using Microsoft.Win32;
@@ -287,7 +287,15 @@ namespace Fleischmann.AdvancedProxy
 		public bool SetAsCurrentProxy()
 		{
 			Registry.SetValue(BaseKey, "ProxyEnable", this.UseProxyServer);
-			Registry.SetValue(BaseKey, "ProxyOverride", this.ExcludeAddressesFromProxy);
+
+			if (BypassProxyForLocalAddress)
+			{
+				Registry.SetValue(BaseKey, "ProxyOverride", this.ExcludeAddressesFromProxy + ";<local>");
+			}
+			else
+			{
+				Registry.SetValue(BaseKey, "ProxyOverride", this.ExcludeAddressesFromProxy);
+			}
 
 			StringBuilder proxyString = new StringBuilder();
 			if (HTTPProxyAddress != string.Empty)
@@ -314,13 +322,7 @@ namespace Fleischmann.AdvancedProxy
 				}
 			}
 
-			if (BypassProxyForLocalAddress)
-			{
-				proxyString.Append(";<local>");
-			}
-
 			Registry.SetValue(BaseKey, "ProxyServer", proxyString.ToString());
-
 
 			return true;
 		}
@@ -331,7 +333,7 @@ namespace Fleischmann.AdvancedProxy
 			{
 				proxyString.Append(";");
 			}
-			proxyString.Append(proxyType).Append("=").Append(proxyAddress).Append(":").Append(proxyAddress);
+			proxyString.Append(proxyType).Append("=").Append(proxyAddress).Append(":").Append(proxyPort);
 		}
 
 		public bool SaveInConfigFile()

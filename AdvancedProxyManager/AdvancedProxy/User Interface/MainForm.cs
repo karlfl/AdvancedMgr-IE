@@ -3,13 +3,14 @@
 // Path: D:\My Documents\Visual Studio 2005\Projects\AdvancedProxy\AdvancedProxy\User Interface, Author: rzd7jx
 // Code lines: 170, Size of file: 5.02 KB
 // Creation date: 12/30/2006 11:40 AM
-// Last modified: 1/11/2007 12:22 PM
+// Last modified: 1/12/2007 3:27 PM
 // Generated with Commenter by abi.exDream.com
 
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
@@ -35,7 +36,7 @@ namespace Fleischmann.AdvancedProxy
 		{
 			if (_proxyList.Count == 0)
 			{
-				DialogResult result = MessageBox.Show("You currently have no Proxy Settings defined.  /n Would you like to create an initial settings based on your current proxy settings in Internet Explorer?", "Create Initial Proxy Set", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
+				DialogResult result = MessageBox.Show("You currently have no Proxy Settings defined.  \n Would you like to create an initial settings based on your current proxy settings in Internet Explorer?", "Create Initial Proxy Set", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
 				if (result == DialogResult.Yes)
 				{
 					ProxySetting currentRegistryProxy = ProxySetting.GetCurrentProxyFromRegistry();
@@ -52,6 +53,9 @@ namespace Fleischmann.AdvancedProxy
 					}
 				}
 			}
+
+			this.BringToFront();
+
 
 		}
 
@@ -179,6 +183,8 @@ namespace Fleischmann.AdvancedProxy
 
 				}
 			}
+			checkForIERunning();
+
 		}
 
 		private void btnSetAsCurrent_Click(object sender, EventArgs e)
@@ -186,7 +192,18 @@ namespace Fleischmann.AdvancedProxy
 			ProxySetting selectedProxy = (ProxySetting)this.gridProxySettings.SelectedRows[0].DataBoundItem;
 			selectedProxy.SetAsCurrentProxy();
 
+			checkForIERunning();
+
+
 		}
 
+		private void checkForIERunning()
+		{
+			Process[] ieProcess = Process.GetProcessesByName("IEXPLORE");
+			if (ieProcess.Length > 0)
+			{
+				MessageBox.Show("It appears that Internet Explorer is currently running. \n You will need to restart IE before the new proxy settings will take affect.", "IE Running Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+			}
+		}
 	}
 }

@@ -57,6 +57,7 @@ namespace Fleischmann.AdvancedProxy
 			this.cxmNotifyIconMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.configureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.setCurrentProxyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.firstProxyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.useProxyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
 			this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -65,7 +66,6 @@ namespace Fleischmann.AdvancedProxy
 			this.btnExit = new System.Windows.Forms.Button();
 			this.btnDelete = new System.Windows.Forms.Button();
 			this.btnAdd = new System.Windows.Forms.Button();
-			this.firstProxyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			((System.ComponentModel.ISupportInitialize)(this.gridProxySettings)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.proxyBindingSource)).BeginInit();
 			this.cxmNotifyIconMenu.SuspendLayout();
@@ -322,7 +322,14 @@ namespace Fleischmann.AdvancedProxy
             this.firstProxyToolStripMenuItem});
 			this.setCurrentProxyToolStripMenuItem.Name = "setCurrentProxyToolStripMenuItem";
 			this.setCurrentProxyToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-			this.setCurrentProxyToolStripMenuItem.Text = "Set Current Proxy";
+			this.setCurrentProxyToolStripMenuItem.Text = "Set Current Proxy To";
+			this.setCurrentProxyToolStripMenuItem.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
+			// firstProxyToolStripMenuItem
+			// 
+			this.firstProxyToolStripMenuItem.Name = "firstProxyToolStripMenuItem";
+			this.firstProxyToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.firstProxyToolStripMenuItem.Text = "FirstProxy";
 			// 
 			// useProxyToolStripMenuItem
 			// 
@@ -397,12 +404,6 @@ namespace Fleischmann.AdvancedProxy
 			this.btnAdd.Text = "Add";
 			this.btnAdd.UseVisualStyleBackColor = true;
 			this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
-			// 
-			// firstProxyToolStripMenuItem
-			// 
-			this.firstProxyToolStripMenuItem.Name = "firstProxyToolStripMenuItem";
-			this.firstProxyToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-			this.firstProxyToolStripMenuItem.Text = "FirstProxy";
 			// 
 			// MainForm
 			// 
