@@ -86,7 +86,7 @@ namespace Fleischmann.AdvancedProxy
 			set { _HTTPProxyAddress = value; }
 		}
 
-		private string _HTTPProxyPort;
+		private string _HTTPProxyPort = "";
 		public string HTTPProxyPort
 		{
 			get { return _HTTPProxyPort; }
@@ -100,7 +100,7 @@ namespace Fleischmann.AdvancedProxy
 			set { _SecureProxyAddress = value; }
 		}
 
-		private string _SecureProxyPort;
+		private string _SecureProxyPort = "";
 		public string SecureProxyPort
 		{
 			get { return _SecureProxyPort; }
@@ -114,7 +114,7 @@ namespace Fleischmann.AdvancedProxy
 			set { _FTPProxyAddress = value; }
 		}
 
-		private string _FTPProxyPort;
+		private string _FTPProxyPort = "";
 		public string FTPProxyPort
 		{
 			get { return _FTPProxyPort; }
@@ -128,7 +128,7 @@ namespace Fleischmann.AdvancedProxy
 			set { _GopherProxyAddress = value; }
 		}
 
-		private string _GopherProxyPort;
+		private string _GopherProxyPort = "";
 		public string GopherProxyPort
 		{
 			get { return _GopherProxyPort; }
@@ -142,7 +142,7 @@ namespace Fleischmann.AdvancedProxy
 			set { _SocksProxyAddress = value; }
 		}
 
-		private string _SocksProxyPort;
+		private string _SocksProxyPort = "";
 		public string SocksProxyPort
 		{
 			get { return _SocksProxyPort; }
@@ -175,8 +175,8 @@ namespace Fleischmann.AdvancedProxy
 			this.UseAutoConfigureScriptAddress = configElement.AutoConfigScriptAddress;
 			this.UseProxyServer = configElement.UseProxyServer;
 			this.UseProxyServerAddress = configElement.UseProxyServerAddress;
-			this.BypassProxyForLocalAddress = configElement.BypassProxyForLocalAddress;
 			this.UseProxyServerPort = configElement.UseProxyServerPort;
+			this.BypassProxyForLocalAddress = configElement.BypassProxyForLocalAddress;
 			this.ExcludeAddressesFromProxy = configElement.ExcludeAddressesFromProxy;
 			this.UseSameProxyServerForAllProtocols = configElement.UseSameProxyServerForAll;
 			if (configElement.ProxyURLs["HTTP"] != null)
@@ -211,11 +211,6 @@ namespace Fleischmann.AdvancedProxy
 			List<ProxySetting> list = new List<ProxySetting>();
 			return list;
 			
-		}
-
-		public static bool SetAsCurrentProxy(ProxySetting theProxy)
-		{
-			return true;
 		}
 
 		public static ProxySetting GetCurrentProxyFromRegistry()
@@ -286,7 +281,7 @@ namespace Fleischmann.AdvancedProxy
 
 		public bool SetAsCurrentProxy()
 		{
-			Registry.SetValue(BaseKey, "ProxyEnable", this.UseProxyServer);
+			Registry.SetValue(BaseKey, "ProxyEnable", Convert.ToInt32(this.UseProxyServer));
 
 			if (BypassProxyForLocalAddress)
 			{
@@ -323,6 +318,8 @@ namespace Fleischmann.AdvancedProxy
 			}
 
 			Registry.SetValue(BaseKey, "ProxyServer", proxyString.ToString());
+
+			APIWrapper.InternetOptionSettingsChanged();
 
 			return true;
 		}
@@ -362,7 +359,7 @@ namespace Fleischmann.AdvancedProxy
 			configElement.UseSameProxyServerForAll = this.UseSameProxyServerForAllProtocols;
 
 			UpdateProxyAddressAndPort(this.HTTPProxyAddress, this.HTTPProxyPort, "HTTP", configElement);
-			UpdateProxyAddressAndPort(this.SecureProxyAddress, this.SecureProxyAddress, "HTTPS", configElement);
+			UpdateProxyAddressAndPort(this.SecureProxyAddress, this.SecureProxyPort, "HTTPS", configElement);
 			UpdateProxyAddressAndPort(this.FTPProxyAddress, this.FTPProxyPort, "FTP", configElement);
 			UpdateProxyAddressAndPort(this.GopherProxyAddress, this.GopherProxyPort, "Gopher", configElement);
 			UpdateProxyAddressAndPort(this.SocksProxyAddress, this.SocksProxyPort, "Socks", configElement);
@@ -454,6 +451,7 @@ namespace Fleischmann.AdvancedProxy
 		public static void modifyUseProxy(bool newValue)
 		{
 			Registry.SetValue(BaseKey,"ProxyEnable", Convert.ToInt32(newValue),RegistryValueKind.DWord);
+			APIWrapper.InternetOptionSettingsChanged();
 		}
 
 		public static bool GetUseProxy()

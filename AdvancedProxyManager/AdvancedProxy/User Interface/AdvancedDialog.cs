@@ -57,7 +57,7 @@ namespace Fleischmann.AdvancedProxy
 				this.txtSocksAddress.Text = ActiveProxy.SocksProxyAddress;
 				this.txtSocksPort.Text = ActiveProxy.SocksProxyPort.ToString();
 
-				enabled = false;
+				enabled = true;
 			}
 
 			this.txtSecureAddress.Enabled = enabled;

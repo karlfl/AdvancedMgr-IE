@@ -13,6 +13,7 @@
     <SccLocalPath>SAK</SccLocalPath>
     <SccAuxPath>SAK</SccAuxPath>
     <SccProvider>SAK</SccProvider>
+    <ApplicationIcon>Icons\Enabled.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -45,10 +46,9 @@
     <Compile Include="Class Files\Configuration\ProxyURLCollection.cs" />
     <Compile Include="Class Files\Configuration\ProxyDefinitionSection.cs" />
     <Compile Include="Class Files\Configuration\ProxyElement.cs" />
-    <Compile Include="Class Files\ProxyConfigFile.cs" />
     <Compile Include="Class Files\Configuration\ProxyElementCollection.cs" />
-    <Compile Include="Class Files\ProxySettingGroup.cs" />
     <Compile Include="Class Files\Configuration\ProxyURL.cs" />
+    <Compile Include="Class Files\Utility\APIWrapper.cs" />
     <Compile Include="User Interface\AdvancedDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -116,6 +116,10 @@
     <Compile Include="User Interface\ProxyNamePromptDialog.Designer.cs">
       <DependentUpon>ProxyNamePromptDialog.cs</DependentUpon>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Icons\Enabled.ico" />
+    <Content Include="Icons\Disabled.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

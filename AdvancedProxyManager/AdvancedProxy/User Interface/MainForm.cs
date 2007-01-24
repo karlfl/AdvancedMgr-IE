@@ -3,9 +3,10 @@
 // Path: D:\My Documents\Visual Studio 2005\Projects\AdvancedProxy\AdvancedProxy\User Interface, Author: rzd7jx
 // Code lines: 170, Size of file: 5.02 KB
 // Creation date: 12/30/2006 11:40 AM
-// Last modified: 1/12/2007 3:27 PM
+// Last modified: 1/15/2007 3:18 PM
 // Generated with Commenter by abi.exDream.com
 
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -22,6 +23,11 @@ namespace Fleischmann.AdvancedProxy
 	/// </summary>
 	public partial class MainForm : Form
 	{
+		private Icon enabledIcon = new Icon("Enabled.ico");
+		private Icon disabledIcon = new Icon("Disabled.ico");
+
+		private const string BaseAutoRunKey = "Software\\Microsoft\\Windows\\CurrentVersion\\Run";
+
 		private bool _applicationExiting = false;
 		private List<ProxySetting> _proxyList;
 
@@ -36,7 +42,7 @@ namespace Fleischmann.AdvancedProxy
 		{
 			if (_proxyList.Count == 0)
 			{
-				DialogResult result = MessageBox.Show("You currently have no Proxy Settings defined.  \n Would you like to create an initial settings based on your current proxy settings in Internet Explorer?", "Create Initial Proxy Set", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
+				DialogResult result = MessageBox.Show("You currently have no Proxy Settings defined.  \n\n Would you like to create an initial configuration based on your current proxy settings in Internet Explorer?", "Create Initial Proxy Set", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
 				if (result == DialogResult.Yes)
 				{
 					ProxySetting currentRegistryProxy = ProxySetting.GetCurrentProxyFromRegistry();
@@ -54,40 +60,56 @@ namespace Fleischmann.AdvancedProxy
 				}
 			}
 
-			this.BringToFront();
-
-
+			RefreshTrayIcon();
+			icnProxyNotifyIcon.ShowBalloonTip(100); // when first opening display a balloon tip.
+			this.Hide();
 		}
 
 		private void icnProxyNotifyIcon_DoubleClick(object sender, EventArgs e)
 		{
-			this.Show();
+			useProxyToolStripMenuItem_Click(sender, e);
 		}
 
 		private void configureToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			this.Show();
+			this.BringToFront();
 		}
 
 		private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
 		{
 			if (!_applicationExiting)
 			{
-				DialogResult result = MessageBox.Show("Minimize to System Tray?", "Closing = Advanced Proxy Configure", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-				if (result == DialogResult.Yes)
-				{
+				//DialogResult result = MessageBox.Show("Minimize to System Tray?", "Closing Advanced Proxy Manager", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+				//if (result == DialogResult.Yes)
+				//{
 					this.Hide();
 					e.Cancel = true;
-				}
+				//}
 			}
 		}
 
 		private void useProxyToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			bool newValue = !useProxyToolStripMenuItem.Checked;
-			useProxyToolStripMenuItem.Checked = newValue;
-			ProxySetting.modifyUseProxy(newValue);
+			bool useProxy = !useProxyToolStripMenuItem.Checked;
+			useProxyToolStripMenuItem.Checked = useProxy;
+			ProxySetting.modifyUseProxy(useProxy);
 
+			RefreshTrayIcon();
+		}
+
+		private void RefreshTrayIcon()
+		{
+			if (ProxySetting.GetUseProxy())
+			{
+				this.icnProxyNotifyIcon.Icon = enabledIcon;
+
+			}
+			else
+			{
+				this.icnProxyNotifyIcon.Icon = disabledIcon;
+
+			}
 		}
 
 		private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -117,6 +139,11 @@ namespace Fleischmann.AdvancedProxy
 			}
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void btnEdit_Click(object sender, EventArgs e)
 		{
 			ProxySetting selectedProxy = (ProxySetting)this.gridProxySettings.SelectedRows[0].DataBoundItem;
@@ -170,6 +197,17 @@ namespace Fleischmann.AdvancedProxy
 		    }
 
 			useProxyToolStripMenuItem.Checked = ProxySetting.GetUseProxy();
+			RegistryKey autoRunKey = Registry.CurrentUser.OpenSubKey(BaseAutoRunKey);
+			string autorunexe = Convert.ToString(autoRunKey.GetValue("Advanced Proxy Manager"));
+			if (string.IsNullOrEmpty(autorunexe))
+			{
+				autorunAtStartupToolStripMenuItem.Checked = false;
+			}
+			else
+			{
+				autorunAtStartupToolStripMenuItem.Checked = true;
+			}
+
 
 		}
 
@@ -183,27 +221,39 @@ namespace Fleischmann.AdvancedProxy
 
 				}
 			}
-			checkForIERunning();
-
 		}
 
 		private void btnSetAsCurrent_Click(object sender, EventArgs e)
 		{
 			ProxySetting selectedProxy = (ProxySetting)this.gridProxySettings.SelectedRows[0].DataBoundItem;
 			selectedProxy.SetAsCurrentProxy();
-
-			checkForIERunning();
-
-
 		}
 
-		private void checkForIERunning()
+		private void InternetSettingsToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			Process[] ieProcess = Process.GetProcessesByName("IEXPLORE");
-			if (ieProcess.Length > 0)
+			APIWrapper.LaunchInternetControlPanel(this.Handle);
+		}
+
+		private void autorunAtStartupToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			bool autoRun = !autorunAtStartupToolStripMenuItem.Checked;
+			autorunAtStartupToolStripMenuItem.Checked = autoRun;
+			string installdir = Application.ExecutablePath;
+			RegistryKey currentUserKey = Registry.CurrentUser;
+			RegistryKey autoRunKey = currentUserKey.OpenSubKey(BaseAutoRunKey, true);
+			if (autoRun)
 			{
-				MessageBox.Show("It appears that Internet Explorer is currently running. \n You will need to restart IE before the new proxy settings will take affect.", "IE Running Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				autoRunKey.SetValue("Advanced Proxy Manager", installdir);
 			}
+			else
+			{
+				autoRunKey.DeleteValue("Advanced Proxy Manager");
+			}
+		}
+
+		private void refreshIconTimer_Tick(object sender, EventArgs e)
+		{
+			RefreshTrayIcon();
 		}
 	}
 }

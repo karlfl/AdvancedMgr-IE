@@ -74,6 +74,7 @@ namespace Fleischmann.AdvancedProxy
 			// 
 			// txtUseAutoConfigScriptAddress
 			// 
+			this.txtUseAutoConfigScriptAddress.Enabled = false;
 			this.txtUseAutoConfigScriptAddress.Location = new System.Drawing.Point(73, 105);
 			this.txtUseAutoConfigScriptAddress.Name = "txtUseAutoConfigScriptAddress";
 			this.txtUseAutoConfigScriptAddress.Size = new System.Drawing.Size(206, 20);
@@ -82,6 +83,7 @@ namespace Fleischmann.AdvancedProxy
 			// ckbUseAutoConfigScript
 			// 
 			this.ckbUseAutoConfigScript.AutoSize = true;
+			this.ckbUseAutoConfigScript.Enabled = false;
 			this.ckbUseAutoConfigScript.Location = new System.Drawing.Point(9, 82);
 			this.ckbUseAutoConfigScript.Name = "ckbUseAutoConfigScript";
 			this.ckbUseAutoConfigScript.Size = new System.Drawing.Size(190, 17);
@@ -92,6 +94,7 @@ namespace Fleischmann.AdvancedProxy
 			// ckbAutoDetectSettings
 			// 
 			this.ckbAutoDetectSettings.AutoSize = true;
+			this.ckbAutoDetectSettings.Enabled = false;
 			this.ckbAutoDetectSettings.Location = new System.Drawing.Point(9, 58);
 			this.ckbAutoDetectSettings.Name = "ckbAutoDetectSettings";
 			this.ckbAutoDetectSettings.Size = new System.Drawing.Size(164, 17);
