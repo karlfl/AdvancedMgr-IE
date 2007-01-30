@@ -1,0 +1,57 @@
+<?xml version='1.0'?> 
+<Wix xmlns='http://schemas.microsoft.com/wix/2006/wi'>
+	<Product Id='B8D2AEBA-E60E-40E0-AEDE-CB560F3B9CE7' Name='Advanced Proxy Manager' Language='1033'
+			 Version='0.2' Manufacturer='Karl Fleischmann' UpgradeCode='95B46C1B-80B0-40AB-8563-17DA07CACEEB' >
+		<Package Id='B8D2AEBA-E60E-40E0-AEDE-CB560F3B9CE7'
+				 Description='Installer for the Advanced Proxy Manager for Internet Explorer'
+				 Comments='Easily manage the proxy settings in Internet Explorer'
+				 Manufacturer='Karl Fleischmann' InstallerVersion='200' Compressed='yes' />
+		<Media Id='1' Cabinet='AdvancedProxyManager.cab' EmbedCab='yes' />
+		<Directory Id='TARGETDIR' Name='SourceDir'>
+			<!-- Program files folders -->
+			<Directory Id='ProgramFilesFolder' Name='PFiles'>
+				<Directory Id='MfgDir' Name='Karl Fleischmann'>
+					<Directory Id='MyDir' Name='Advanced Proxy Manager'>
+						<!--Executable with advertised shortcut -->
+						<Component Id='APMMain' Guid='BA7797B8-EAE5-4448-A316-AF27D6D03A73'>
+							<File Id='mainexe' Name='AdvancedProxyManager.exe' DiskId='1' Source='..\AdvancedProxy\bin\debug\AdvancedProxyManager.exe' Vital='yes'>
+								<Shortcut Id="startmenuAPM" Directory="ProgramMenuDir" Name="Advanced Proxy Manager" WorkingDirectory='MyDir' Icon="AdvancedProxyManager.exe" IconIndex="0" Advertise="yes"/>
+							</File>
+							<File Id='enableico' Name='Enabled.ico' DiskId='1' Source='..\AdvancedProxy\icons\enabled.ico' Vital='yes'/>
+							<File Id='disableico' Name='Disabled.ico' DiskId='1' Source='..\AdvancedProxy\icons\disabled.ico' Vital='yes'/>
+						</Component>
+					</Directory>
+				</Directory>
+			</Directory>
+			<!-- Start menu folders -->
+			<Directory Id="ProgramMenuFolder" Name="PMenu">
+				<Directory Id="ProgramMenuDir" Name="Advanced Proxy Manager">
+					<!-- Make sure the start menu is created and deleted on install/uninstall and is 'per user' -->
+					<Component Id="StartMenuEntries" Guid="{CEA7EB3C-E58F-45cb-A0CA-26A979E72F23}" DiskId="1">
+						<!-- Create registry key (which makes this component dependant on the registry and not on a file) -->
+						<RegistryKey Id="MyApp" Key="SOFTWARE\KarlFlesichmann\AdvancedProxy\Install" Root="HKCU" Action="createAndRemoveOnUninstall" />
+						<!-- Make sure the start menu is cleaned on unstall -->
+						<RemoveFolder Id="VendorStartMenu" On="uninstall" Directory="ProgramMenuDir" />
+					</Component>
+					<!--Unadvertised shortcut -->
+					<Component Id="UnadvertisedShortcut" Guid="{0155ECCC-1AB5-4a74-A99C-0645F906C3E0}">
+						<!-- HKMU gives ICE57, HKCU works but I think that is not the correct location for the key -->
+						<RegistryKey Key="SOFTWARE\KarlFlesichmann\AdvancedProxy\Install" Root="HKCU" Action="none">
+							<RegistryValue Id="UnadvertisedShortcut" Name="UnadvertisedShortcut" Type="integer" Value="1" Action="write" KeyPath="yes" />
+						</RegistryKey>
+					</Component>
+
+				</Directory>
+			</Directory>
+		</Directory>
+
+		<Feature Id='Complete' Level='1'>
+			<ComponentRef Id='APMMain' />
+			<ComponentRef Id='StartMenuEntries'/>
+			<ComponentRef Id='UnadvertisedShortcut'/>
+		</Feature>
+
+		<Icon Id="AdvancedProxyManager.exe" SourceFile="Enabled.ico" />
+	</Product>
+</Wix>
+
