@@ -23,13 +23,23 @@ namespace Fleischmann.AdvancedProxy
 	/// </summary>
 	public partial class MainForm : Form
 	{
-		private Icon enabledIcon = new Icon("Enabled.ico");
-		private Icon disabledIcon = new Icon("Disabled.ico");
+		private Icon enabledIcon = new Icon(Application.StartupPath + "\\Enabled.ico");
+		private Icon disabledIcon = new Icon(Application.StartupPath + "\\Disabled.ico");
 
 		private const string BaseAutoRunKey = "Software\\Microsoft\\Windows\\CurrentVersion\\Run";
 
+		private const int WM_QUERYENDSESSION = 0x11;
 		private bool _applicationExiting = false;
 		private List<ProxySetting> _proxyList;
+		private bool endSessionPending;
+
+		protected override void WndProc(ref Message m)
+		{
+			if (m.Msg == WM_QUERYENDSESSION)
+				endSessionPending = true;
+			base.WndProc(ref m);
+		}
+
 
 		public MainForm(List<ProxySetting> theProxyList)
 		{
@@ -46,7 +56,7 @@ namespace Fleischmann.AdvancedProxy
 				if (result == DialogResult.Yes)
 				{
 					ProxySetting currentRegistryProxy = ProxySetting.GetCurrentProxyFromRegistry();
-					ProxyNamePromptDialog dlgNamePrompt = new ProxyNamePromptDialog();
+					ProxyNamePromptDialog dlgNamePrompt = new ProxyNamePromptDialog(_proxyList);
 					dlgNamePrompt.txtName.Text = currentRegistryProxy.Name;
 					result = dlgNamePrompt.ShowDialog(this);
 					if (result == DialogResult.OK)
@@ -78,7 +88,12 @@ namespace Fleischmann.AdvancedProxy
 
 		private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
 		{
-			if (!_applicationExiting)
+			if (endSessionPending)
+			{
+				// The session is ending.
+				e.Cancel = false;
+			}
+			else if (!_applicationExiting)
 			{
 				//DialogResult result = MessageBox.Show("Minimize to System Tray?", "Closing Advanced Proxy Manager", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 				//if (result == DialogResult.Yes)
@@ -87,6 +102,7 @@ namespace Fleischmann.AdvancedProxy
 					e.Cancel = true;
 				//}
 			}
+			base.OnClosing(e);
 		}
 
 		private void useProxyToolStripMenuItem_Click(object sender, EventArgs e)
@@ -120,7 +136,7 @@ namespace Fleischmann.AdvancedProxy
 
 		private void btnAdd_Click(object sender, EventArgs e)
 		{
-			ProxyNamePromptDialog dlgNamePrompt = new ProxyNamePromptDialog();
+			ProxyNamePromptDialog dlgNamePrompt = new ProxyNamePromptDialog(_proxyList);
 			DialogResult result = dlgNamePrompt.ShowDialog(this);
 			if (result == DialogResult.OK)
 			{
@@ -133,6 +149,7 @@ namespace Fleischmann.AdvancedProxy
 				{
 					//don't add it until they've entered the data for it and saved it.
 					_proxyList.Add(newProxy);
+					this.gridProxySettings.DataSource = null;
 					this.gridProxySettings.DataSource = _proxyList;
 					this.gridProxySettings.Refresh();
 				}

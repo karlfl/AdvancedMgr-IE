@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.Configuration;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -15,24 +16,33 @@ namespace Fleischmann.AdvancedProxy
 		/// The main entry point for the application.
 		/// </summary>
 		[STAThread]
-		static void Main()
+		public static void Main()
 		{
-			Application.EnableVisualStyles();
-			Application.SetCompatibleTextRenderingDefault(false);
 
-			List<ProxySetting> proxyList = new List<ProxySetting>();
+			Process ThisProcess = Process.GetCurrentProcess();
+			Process[] appProcesses = Process.GetProcessesByName(ThisProcess.ProcessName);
 
-			//Get all proxies defined in the config file.
-			ProxyDefinitionSection section = (ProxyDefinitionSection)ConfigurationManager.GetSection("ProxyDefinition");
-			if (section.ProxyDefinitions != null)
+			//only proceed if not already running (counting this instance).
+			if (appProcesses.Length == 1)
 			{
-				foreach (ProxyElement proxyElement in section.ProxyDefinitions)
+				Application.EnableVisualStyles();
+				Application.SetCompatibleTextRenderingDefault(false);
+
+				List<ProxySetting> proxyList = new List<ProxySetting>();
+
+				//Get all proxies defined in the config file.
+				ProxyDefinitionSection section = (ProxyDefinitionSection)ConfigurationManager.GetSection("ProxyDefinition");
+				if (section.ProxyDefinitions != null)
 				{
-					proxyList.Add(new ProxySetting(proxyElement));
+					foreach (ProxyElement proxyElement in section.ProxyDefinitions)
+					{
+						ProxySetting newSetting = new ProxySetting(proxyElement);
+						proxyList.Add(newSetting);
+					}
 				}
+
+				Application.Run(new MainForm(proxyList));
 			}
-			
-			Application.Run(new MainForm(proxyList));
 		}
 	}
 }
