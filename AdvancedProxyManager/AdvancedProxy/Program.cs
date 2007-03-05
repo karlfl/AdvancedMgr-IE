@@ -41,7 +41,28 @@ namespace Fleischmann.AdvancedProxy
 					}
 				}
 
-				Application.Run(new MainForm(proxyList));
+
+				if (proxyList.Count == 0)
+				{
+					DialogResult result = MessageBox.Show("You currently have no Proxy Settings defined.  \n\n Would you like to create an initial configuration based on your current proxy settings in Internet Explorer?", "Create Initial Proxy Set", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
+					if (result == DialogResult.Yes)
+					{
+						ProxySetting currentRegistryProxy = ProxySetting.GetCurrentProxyFromInternetExplorer();
+						ProxyNamePromptDialog dlgNamePrompt = new ProxyNamePromptDialog(proxyList);
+						dlgNamePrompt.txtName.Text = currentRegistryProxy.Name;
+						result = dlgNamePrompt.ShowDialog();
+						if (result == DialogResult.OK)
+						{
+							currentRegistryProxy.Name = dlgNamePrompt.txtName.Text;
+							currentRegistryProxy.SaveInConfigFile();
+							proxyList.Add(currentRegistryProxy);
+						}
+					}
+				}
+
+
+				new MainForm(proxyList);
+				Application.Run();
 			}
 		}
 	}

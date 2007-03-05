@@ -48,12 +48,18 @@
     <Compile Include="Class Files\Configuration\ProxyElement.cs" />
     <Compile Include="Class Files\Configuration\ProxyElementCollection.cs" />
     <Compile Include="Class Files\Configuration\ProxyURL.cs" />
-    <Compile Include="Class Files\Utility\APIWrapper.cs" />
+    <Compile Include="Class Files\Utility\WinInetInterop.cs" />
     <Compile Include="User Interface\AdvancedDialog.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="User Interface\AdvancedDialog.Designer.cs">
       <DependentUpon>AdvancedDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="User Interface\AutoConfigScriptPromptForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="User Interface\AutoConfigScriptPromptForm.Designer.cs">
+      <DependentUpon>AutoConfigScriptPromptForm.cs</DependentUpon>
     </Compile>
     <Compile Include="User Interface\LanSettingDialog.cs">
       <SubType>Form</SubType>
@@ -72,6 +78,10 @@
     <EmbeddedResource Include="User Interface\AdvancedDialog.resx">
       <SubType>Designer</SubType>
       <DependentUpon>AdvancedDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="User Interface\AutoConfigScriptPromptForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>AutoConfigScriptPromptForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="User Interface\LanSettingDialog.resx">
       <SubType>Designer</SubType>

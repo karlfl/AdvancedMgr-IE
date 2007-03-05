@@ -70,6 +70,7 @@ namespace Fleischmann.AdvancedProxy
 			this.txtHttpAddress.Name = "txtHttpAddress";
 			this.txtHttpAddress.Size = new System.Drawing.Size(153, 20);
 			this.txtHttpAddress.TabIndex = 0;
+			this.txtHttpAddress.TextChanged += new System.EventHandler(this.txtHttpAddress_TextChanged);
 			// 
 			// txtHttpPort
 			// 
@@ -77,6 +78,7 @@ namespace Fleischmann.AdvancedProxy
 			this.txtHttpPort.Name = "txtHttpPort";
 			this.txtHttpPort.Size = new System.Drawing.Size(43, 20);
 			this.txtHttpPort.TabIndex = 1;
+			this.txtHttpPort.TextChanged += new System.EventHandler(this.txtHttpPort_TextChanged);
 			// 
 			// label1
 			// 
@@ -314,7 +316,7 @@ namespace Fleischmann.AdvancedProxy
 			this.label15.Name = "label15";
 			this.label15.Size = new System.Drawing.Size(183, 13);
 			this.label15.TabIndex = 5;
-			this.label15.Text = "Use semicolons (;) to seperate entries";
+			this.label15.Text = "Use semicolons (;) to separate entries";
 			// 
 			// txtExcludeAddresses
 			// 
@@ -374,6 +376,7 @@ namespace Fleischmann.AdvancedProxy
 			this.ShowInTaskbar = false;
 			this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
 			this.Text = "Proxy Settings";
+			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AdvancedDialog_FormClosing);
 			this.Load += new System.EventHandler(this.AdvancedDialog_Load);
 			this.gbxServers.ResumeLayout(false);
 			this.gbxServers.PerformLayout();

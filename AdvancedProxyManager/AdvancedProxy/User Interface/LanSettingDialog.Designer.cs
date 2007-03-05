@@ -74,7 +74,6 @@ namespace Fleischmann.AdvancedProxy
 			// 
 			// txtUseAutoConfigScriptAddress
 			// 
-			this.txtUseAutoConfigScriptAddress.Enabled = false;
 			this.txtUseAutoConfigScriptAddress.Location = new System.Drawing.Point(73, 105);
 			this.txtUseAutoConfigScriptAddress.Name = "txtUseAutoConfigScriptAddress";
 			this.txtUseAutoConfigScriptAddress.Size = new System.Drawing.Size(206, 20);
@@ -83,18 +82,17 @@ namespace Fleischmann.AdvancedProxy
 			// ckbUseAutoConfigScript
 			// 
 			this.ckbUseAutoConfigScript.AutoSize = true;
-			this.ckbUseAutoConfigScript.Enabled = false;
 			this.ckbUseAutoConfigScript.Location = new System.Drawing.Point(9, 82);
 			this.ckbUseAutoConfigScript.Name = "ckbUseAutoConfigScript";
 			this.ckbUseAutoConfigScript.Size = new System.Drawing.Size(190, 17);
 			this.ckbUseAutoConfigScript.TabIndex = 2;
 			this.ckbUseAutoConfigScript.Text = "Use Automatic Configuration Script";
 			this.ckbUseAutoConfigScript.UseVisualStyleBackColor = true;
+			this.ckbUseAutoConfigScript.CheckedChanged += new System.EventHandler(this.ckbUseAutoConfigScript_CheckedChanged);
 			// 
 			// ckbAutoDetectSettings
 			// 
 			this.ckbAutoDetectSettings.AutoSize = true;
-			this.ckbAutoDetectSettings.Enabled = false;
 			this.ckbAutoDetectSettings.Location = new System.Drawing.Point(9, 58);
 			this.ckbAutoDetectSettings.Name = "ckbAutoDetectSettings";
 			this.ckbAutoDetectSettings.Size = new System.Drawing.Size(164, 17);
@@ -185,7 +183,7 @@ namespace Fleischmann.AdvancedProxy
 			this.ckbUseProxyServer.Name = "ckbUseProxyServer";
 			this.ckbUseProxyServer.Size = new System.Drawing.Size(330, 38);
 			this.ckbUseProxyServer.TabIndex = 1;
-			this.ckbUseProxyServer.Text = "Use a proxy server for your lan (These settings will not apply to dial-up or vpn " +
+			this.ckbUseProxyServer.Text = "Use a proxy server for your lan (These settings will not apply to dial-up or VPN " +
 				"connections)";
 			this.ckbUseProxyServer.UseVisualStyleBackColor = true;
 			this.ckbUseProxyServer.CheckedChanged += new System.EventHandler(this.ckbUseProxyServer_CheckedChanged);
