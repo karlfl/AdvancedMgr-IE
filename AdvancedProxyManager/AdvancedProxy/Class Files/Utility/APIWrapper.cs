@@ -13,12 +13,12 @@ using System.Text;
 
 namespace Fleischmann.AdvancedProxy
 {
-	public struct INTERNET_PROXY_INFO 
-	{ 
-		public int dwAccessType; 
-		public IntPtr proxy; 
-		public IntPtr proxyBypass; 
-	}; 
+	public struct INTERNET_PROXY_INFO
+	{
+		public int dwAccessType;
+		public IntPtr proxy;
+		public IntPtr proxyBypass;
+	};
 
 	class APIWrapper
 	{
@@ -31,27 +31,30 @@ namespace Fleischmann.AdvancedProxy
 		public const int INTERNET_OPEN_TYPE_PROXY = 3;
 
 		[DllImport("inetcpl.cpl", SetLastError = true)]
-			public static extern int LaunchInternetControlPanel(IntPtr hWnd);
+		public static extern int LaunchInternetControlPanel(IntPtr hWnd);
 
 		[DllImport("wininet.dll", SetLastError = true)]
-			public static extern bool InternetQueryOption(
-				IntPtr hInternet,			//Handle on which to query information.
-				int dwOption,				//Internet option to be queried.
-				IntPtr lpBuffer,			//Pointer to a buffer that receives the option setting.
-				ref int lpdwBufferLength	//Pointer to a variable that contains the size of lpBuffer, in bytes.
-			);
+		public static extern bool InternetQueryOption(
+			IntPtr hInternet,			//Handle on which to query information.
+			int dwOption,				//Internet option to be queried.
+			IntPtr lpBuffer,			//Pointer to a buffer that receives the option setting.
+			ref int lpdwBufferLength	//Pointer to a variable that contains the size of lpBuffer, in bytes.
+		);
 
-		[DllImport("wininet.dll", SetLastError = true)] 
-			public static extern bool InternetSetOption(
-				IntPtr hInternet,		//Handle on which to query information.
-				int dwOption,			//Internet option to be queried.
-				IntPtr lpBuffer,		//Pointer to a buffer that receives the option setting.
-				int lpdwBufferLength	//Pointer to a variable that contains the size of lpBuffer, in bytes.
-			);
+		[DllImport("wininet.dll", SetLastError = true)]
+		public static extern bool InternetSetOption(
+			IntPtr hInternet,		//Handle on which to query information.
+			int dwOption,			//Internet option to be queried.
+			IntPtr lpBuffer,		//Pointer to a buffer that contains the option setting.
+			int lpdwBufferLength	//Pointer to a variable that contains the size of lpBuffer, in bytes.
+		);
 
-		public static void SaveProxySettings(bool enableProxy, string proxyServerString, string proxyBypass) 
-		{ 
-			INTERNET_PROXY_INFO struct_IPI; 
+
+
+
+		public static void SaveProxySettings(bool enableProxy, string proxyServerString, string proxyBypass)
+		{
+			INTERNET_PROXY_INFO struct_IPI;
 
 			// Filling in structure 
 			if (enableProxy)
@@ -65,14 +68,14 @@ namespace Fleischmann.AdvancedProxy
 
 			struct_IPI.proxy = Marshal.StringToHGlobalAnsi(proxyServerString);
 			struct_IPI.proxyBypass = Marshal.StringToHGlobalAnsi(proxyBypass);
-			
+
 			// Allocating memory 
-			IntPtr intptrStruct = Marshal.AllocCoTaskMem(Marshal.SizeOf(struct_IPI)); 
+			IntPtr intptrStruct = Marshal.AllocCoTaskMem(Marshal.SizeOf(struct_IPI));
 
 			// Converting structure to IntPtr 
-			Marshal.StructureToPtr(struct_IPI, intptrStruct, true); 
+			Marshal.StructureToPtr(struct_IPI, intptrStruct, true);
 
-			bool iReturn = InternetSetOption(IntPtr.Zero, INTERNET_OPTION_PROXY, intptrStruct, Marshal.SizeOf(struct_IPI)); 
+			bool iReturn = InternetSetOption(IntPtr.Zero, INTERNET_OPTION_PROXY, intptrStruct, Marshal.SizeOf(struct_IPI));
 		}
 
 		public static void InternetOptionSettingsChanged()
@@ -81,8 +84,11 @@ namespace Fleischmann.AdvancedProxy
 			if (iReturn == false)
 			{
 				int test = 1;
-				
+
 			}
 		}
 	}
+
+	
+
 }
