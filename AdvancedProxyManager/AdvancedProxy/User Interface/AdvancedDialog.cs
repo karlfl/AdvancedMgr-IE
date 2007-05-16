@@ -32,7 +32,7 @@ namespace Fleischmann.AdvancedProxy
 		
 		#endregion
 
-		#region Form Load Even
+		#region Form Load Event
 		private void AdvancedDialog_Load(object sender, EventArgs e)
 		{
 			loadForm();
@@ -50,6 +50,8 @@ namespace Fleischmann.AdvancedProxy
 				this.txtSecurePort.Text = ActiveProxy.UseProxyServerPort;
 				this.txtFTPAddress.Text = ActiveProxy.UseProxyServerAddress;
 				this.txtFTPPort.Text = ActiveProxy.UseProxyServerPort;
+				this.txtGopherAddress.Text = ActiveProxy.UseProxyServerAddress;
+				this.txtGopherPort.Text = ActiveProxy.UseProxyServerPort;
 				this.txtGopherAddress.Text = ActiveProxy.UseProxyServerAddress;
 				this.txtGopherPort.Text = ActiveProxy.UseProxyServerPort;
 			}
@@ -215,6 +217,7 @@ namespace Fleischmann.AdvancedProxy
 			this.txtSecureAddress.Text = this.txtHttpAddress.Text;
 			this.txtFTPAddress.Text = this.txtHttpAddress.Text;
 			this.txtGopherAddress.Text = this.txtHttpAddress.Text;
+			this.txtSocksAddress.Text = this.txtHttpAddress.Text;
 		}
 
 		private void SetAllToHTTPPortText()
@@ -222,6 +225,7 @@ namespace Fleischmann.AdvancedProxy
 			this.txtSecurePort.Text = this.txtHttpPort.Text;
 			this.txtFTPPort.Text = this.txtHttpPort.Text;
 			this.txtGopherPort.Text = this.txtHttpPort.Text;
+			this.txtSocksPort.Text = this.txtHttpPort.Text;
 		}
 
 		private void EnableTextBoxes(bool enabled)

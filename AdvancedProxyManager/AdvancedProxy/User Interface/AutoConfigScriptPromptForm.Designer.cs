@@ -28,10 +28,13 @@ namespace Fleischmann.AdvancedProxy
 		/// </summary>
 		private void InitializeComponent()
 		{
+			this.components = new System.ComponentModel.Container();
 			this.lblAddress = new System.Windows.Forms.Label();
 			this.txtAddress = new System.Windows.Forms.TextBox();
 			this.btnOK = new System.Windows.Forms.Button();
 			this.btnCancel = new System.Windows.Forms.Button();
+			this.scriptURLErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+			((System.ComponentModel.ISupportInitialize)(this.scriptURLErrorProvider)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// lblAddress
@@ -50,16 +53,17 @@ namespace Fleischmann.AdvancedProxy
 			this.txtAddress.Size = new System.Drawing.Size(192, 20);
 			this.txtAddress.TabIndex = 1;
 			this.txtAddress.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtAddress_KeyPress);
+			this.txtAddress.TextChanged += new System.EventHandler(this.txtAddress_TextChanged);
 			// 
 			// btnOK
 			// 
-			this.btnOK.DialogResult = System.Windows.Forms.DialogResult.OK;
 			this.btnOK.Location = new System.Drawing.Point(94, 49);
 			this.btnOK.Name = "btnOK";
 			this.btnOK.Size = new System.Drawing.Size(75, 23);
 			this.btnOK.TabIndex = 2;
 			this.btnOK.Text = "OK";
 			this.btnOK.UseVisualStyleBackColor = true;
+			this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
 			// 
 			// btnCancel
 			// 
@@ -71,11 +75,16 @@ namespace Fleischmann.AdvancedProxy
 			this.btnCancel.Text = "Cancel";
 			this.btnCancel.UseVisualStyleBackColor = true;
 			// 
+			// scriptURLErrorProvider
+			// 
+			this.scriptURLErrorProvider.ContainerControl = this;
+			// 
 			// AutoConfigScriptPromptForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(268, 82);
+			this.CancelButton = this.btnCancel;
+			this.ClientSize = new System.Drawing.Size(288, 82);
 			this.ControlBox = false;
 			this.Controls.Add(this.btnCancel);
 			this.Controls.Add(this.btnOK);
@@ -89,6 +98,7 @@ namespace Fleischmann.AdvancedProxy
 			this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
 			this.Text = "Automatic Configuration Script";
 			this.Load += new System.EventHandler(this.AutoConfigScriptPromptForm_Load);
+			((System.ComponentModel.ISupportInitialize)(this.scriptURLErrorProvider)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -100,5 +110,6 @@ namespace Fleischmann.AdvancedProxy
 		public System.Windows.Forms.TextBox txtAddress;
 		private System.Windows.Forms.Button btnOK;
 		private System.Windows.Forms.Button btnCancel;
+		private System.Windows.Forms.ErrorProvider scriptURLErrorProvider;
 	}
 }

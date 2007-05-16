@@ -21,8 +21,7 @@ namespace Fleischmann.AdvancedProxy
 	/// </summary>
 	public class ProxySetting
 	{
-		private const string BaseKey = "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings";
-
+		#region Properties
 		private string _Name;
 		public string Name
 		{
@@ -163,6 +162,9 @@ namespace Fleischmann.AdvancedProxy
 			set { _ExcludeAddressesFromProxy = value; }
 		}
 
+		#endregion
+
+		#region Constructors
 		public ProxySetting()
 		{
 		}
@@ -205,30 +207,29 @@ namespace Fleischmann.AdvancedProxy
 				this.SocksProxyPort = configElement.ProxyURLs["Socks"].Port.ToString();
 			}
 		}
+		
+		#endregion
 
+		#region Get List All Advanced Proxy Settings
 		public static List<ProxySetting> GetAllAdvancedProxies()
 		{
 			List<ProxySetting> list = new List<ProxySetting>();
 			return list;
-			
-		}
 
-		public static ProxySetting GetCurrentProxyFromRegistry()
+		}
+		#endregion
+
+		#region Get Current Proxy Settings From Registry
+		public static ProxySetting GetCurrentProxyFromInternetExplorer()
 		{
 			ProxySetting returnProxy = new ProxySetting();
-			returnProxy.UseProxyServer = Convert.ToBoolean(Registry.GetValue(BaseKey, "ProxyEnable", false));
-			returnProxy.ExcludeAddressesFromProxy = Convert.ToString(Registry.GetValue(BaseKey, "ProxyOverride", ""));
-			if (returnProxy.ExcludeAddressesFromProxy.EndsWith("<local>"))
-			{
-				returnProxy.BypassProxyForLocalAddress = true;
-				returnProxy.ExcludeAddressesFromProxy = returnProxy.ExcludeAddressesFromProxy.Substring(0,returnProxy.ExcludeAddressesFromProxy.Length - 8);
-			}
-			else
-			{
-				returnProxy.BypassProxyForLocalAddress = false;
-			}
-			string proxyServerString = Convert.ToString(Registry.GetValue(BaseKey, "ProxyServer", ""));
-			if (proxyServerString.Trim() != string.Empty)
+			returnProxy.AutoDetectSettings = ProxySetting.GetCurrentActiveAutoDetectProxy();
+			returnProxy.UseAutoConfigureScript = ProxySetting.GetCurrentActiveAutoConfigProxy();
+			returnProxy.UseAutoConfigureScriptAddress = ProxySetting.GetCurrentActiveAutoConfigURL();
+			returnProxy.UseProxyServer = ProxySetting.GetCurrentActiveUseProxy();
+
+			string proxyServerString = ProxySetting.GetCurrentActiveProxyServerURLs();
+			if (!string.IsNullOrEmpty(proxyServerString.Trim()))
 			{
 				string[] proxyServerList = proxyServerString.Split(';');
 				if (proxyServerList.Length > 1)
@@ -273,66 +274,24 @@ namespace Fleischmann.AdvancedProxy
 				}
 
 				returnProxy.Name = "Initial Proxy Settings";
-				//returnProxy.Description = "Copy of proxy information found in current registry keys";
+			}
+
+			returnProxy.ExcludeAddressesFromProxy = ProxySetting.GetCurrentActiveBypassProxy();
+			if (returnProxy.ExcludeAddressesFromProxy.EndsWith("<local>"))
+			{
+				returnProxy.BypassProxyForLocalAddress = true;
+				returnProxy.ExcludeAddressesFromProxy = returnProxy.ExcludeAddressesFromProxy.Substring(0, returnProxy.ExcludeAddressesFromProxy.Length - 8);
+			}
+			else
+			{
+				returnProxy.BypassProxyForLocalAddress = false;
 			}
 
 			return returnProxy;
 		}
+		#endregion
 
-		public bool SetAsCurrentProxy()
-		{
-			Registry.SetValue(BaseKey, "ProxyEnable", Convert.ToInt32(this.UseProxyServer));
-
-			if (BypassProxyForLocalAddress)
-			{
-				Registry.SetValue(BaseKey, "ProxyOverride", this.ExcludeAddressesFromProxy + ";<local>");
-			}
-			else
-			{
-				Registry.SetValue(BaseKey, "ProxyOverride", this.ExcludeAddressesFromProxy);
-			}
-
-			StringBuilder proxyString = new StringBuilder();
-			if (HTTPProxyAddress != string.Empty)
-			{
-				buildProxyString(proxyString, "http", HTTPProxyAddress, HTTPProxyPort);
-			}
-			if (!UseSameProxyServerForAllProtocols)
-			{
-				if (SecureProxyAddress != string.Empty)
-				{
-					buildProxyString(proxyString, "https", SecureProxyAddress, SecureProxyPort);
-				}
-				if (FTPProxyAddress != string.Empty)
-				{
-					buildProxyString(proxyString, "ftp", FTPProxyAddress, FTPProxyPort);
-				}
-				if (GopherProxyAddress != string.Empty)
-				{
-					buildProxyString(proxyString, "gopher", GopherProxyAddress, GopherProxyPort);
-				}
-				if (SocksProxyAddress != string.Empty)
-				{
-					buildProxyString(proxyString, "socks", SocksProxyAddress, SocksProxyPort);
-				}
-			}
-
-			Registry.SetValue(BaseKey, "ProxyServer", proxyString.ToString());
-
-			APIWrapper.InternetOptionSettingsChanged();
-
-			return true;
-		}
-
-		private void buildProxyString(StringBuilder proxyString, string proxyType, string proxyAddress, string proxyPort)
-		{
-			if (proxyString.Length > 0)
-			{
-				proxyString.Append(";");
-			}
-			proxyString.Append(proxyType).Append("=").Append(proxyAddress).Append(":").Append(proxyPort);
-		}
-
+		#region Update Config File Methods
 		public bool SaveInConfigFile()
 		{
 			//Update config element values to the values on this class.
@@ -369,7 +328,7 @@ namespace Fleischmann.AdvancedProxy
 			return true;
 		}
 
-		public bool Delete()
+		public bool DeleteFromConfig()
 		{
 			//Remove this config element
 			Configuration myConfig = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
@@ -380,10 +339,10 @@ namespace Fleischmann.AdvancedProxy
 			return true;
 		}
 
-		private void UpdateProxyAddressAndPort(string ProxyAddress, string ProxyPort, string ProxyProtocol, ProxyElement configElement)
+		private static void UpdateProxyAddressAndPort(string ProxyAddress, string ProxyPort, string ProxyProtocol, ProxyElement configElement)
 		{
 			if (ProxyAddress != null &&
-				ProxyAddress != string.Empty)
+				!string.IsNullOrEmpty(ProxyAddress))
 			{
 				if (configElement.ProxyURLs[ProxyProtocol] != null)
 				{
@@ -410,7 +369,9 @@ namespace Fleischmann.AdvancedProxy
 				}
 			}
 		}
+		#endregion
 
+		#region Clone (Copy Class)
 		public ProxySetting Clone()
 		{
 			ProxySetting returnProxy = new ProxySetting();
@@ -434,31 +395,168 @@ namespace Fleischmann.AdvancedProxy
 			returnProxy.UseProxyServerAddress = this.UseProxyServerAddress;
 			returnProxy.UseProxyServerPort = this.UseProxyServerPort;
 			returnProxy.UseSameProxyServerForAllProtocols = this.UseSameProxyServerForAllProtocols;
-
+			
 			return returnProxy;
 		}
+		#endregion
 
-		public static void DisableProxy()
+		#region Copy Existing Proxy (Set Values on current class to new class)
+		public void Copy(ProxySetting newValues)
 		{
-			modifyUseProxy(false);
+			this.AutoDetectSettings = newValues.AutoDetectSettings;
+			this.BypassProxyForLocalAddress = newValues.BypassProxyForLocalAddress;
+			this.ExcludeAddressesFromProxy = newValues.ExcludeAddressesFromProxy;
+			this.FTPProxyAddress = newValues.FTPProxyAddress;
+			this.FTPProxyPort = newValues.FTPProxyPort;
+			this.GopherProxyAddress = newValues.GopherProxyAddress;
+			this.GopherProxyPort = newValues.GopherProxyPort;
+			this.HTTPProxyAddress = newValues.HTTPProxyAddress;
+			this.HTTPProxyPort = newValues.HTTPProxyPort;
+			this.Name = newValues.Name;
+			this.SecureProxyAddress = newValues.SecureProxyAddress;
+			this.SecureProxyPort = newValues.SecureProxyPort;
+			this.SocksProxyAddress = newValues.SocksProxyAddress;
+			this.SocksProxyPort = newValues.SocksProxyPort;
+			this.UseAutoConfigureScript = newValues.UseAutoConfigureScript;
+			this.UseAutoConfigureScriptAddress = newValues.UseAutoConfigureScriptAddress;
+			this.UseProxyServer = newValues.UseProxyServer;
+			this.UseProxyServerAddress = newValues.UseProxyServerAddress;
+			this.UseProxyServerPort = newValues.UseProxyServerPort;
+			this.UseSameProxyServerForAllProtocols = newValues.UseSameProxyServerForAllProtocols;
+		}
+		#endregion
+
+		#region Set As Current Proxy
+		public bool SetAsCurrentProxy()
+		{
+			StringBuilder proxyString = new StringBuilder();
+			if (!string.IsNullOrEmpty(UseProxyServerAddress))
+			{
+				buildProxyString(proxyString, "", UseProxyServerAddress, UseProxyServerPort);
+			}
+			else
+			{
+				if (!string.IsNullOrEmpty(HTTPProxyAddress))
+				{
+					buildProxyString(proxyString, "http", HTTPProxyAddress, HTTPProxyPort);
+				}
+				if (!UseSameProxyServerForAllProtocols)
+				{
+					if (!string.IsNullOrEmpty(SecureProxyAddress))
+					{
+						buildProxyString(proxyString, "https", SecureProxyAddress, SecureProxyPort);
+					}
+					if (!string.IsNullOrEmpty(FTPProxyAddress))
+					{
+						buildProxyString(proxyString, "ftp", FTPProxyAddress, FTPProxyPort);
+					}
+					if (!string.IsNullOrEmpty(GopherProxyAddress))
+					{
+						buildProxyString(proxyString, "gopher", GopherProxyAddress, GopherProxyPort);
+					}
+					if (!string.IsNullOrEmpty(SocksProxyAddress))
+					{
+						buildProxyString(proxyString, "socks", SocksProxyAddress, SocksProxyPort);
+					}
+				}
+			}
+
+			string excludeAddress = this.ExcludeAddressesFromProxy;
+			if (BypassProxyForLocalAddress)
+			{
+				excludeAddress += ";<local>";
+			}
+
+			return WinInetInterop.SetInternetProxy(this.UseProxyServer, proxyString.ToString(), excludeAddress,
+												this.AutoDetectSettings,this.UseAutoConfigureScript,this.UseAutoConfigureScriptAddress);
 		}
 
-		public static void EnableProxy()
+		private static void buildProxyString(StringBuilder proxyString, string proxyType, string proxyAddress, string proxyPort)
 		{
-			modifyUseProxy(true);
+			if (proxyString.Length > 0)
+			{
+				proxyString.Append(";");
+			}
+			if (!string.IsNullOrEmpty(proxyType))
+			{
+				proxyString.Append(proxyType);
+				proxyString.Append("=");
+			}
+			proxyString.Append(proxyAddress).Append(":").Append(proxyPort);
+		}
+		#endregion
+
+		#region Static Utility Methods for Current Active Proxy Settings
+		#region Get/Modify Current Active Use Proxy Flag
+		public static void ModifyCurrentActiveUseProxy(bool newValue)
+		{
+			WinInetInterop.SwitchUseProxy(newValue);
 		}
 
-		public static void modifyUseProxy(bool newValue)
+		public static bool GetCurrentActiveUseProxy()
 		{
-			Registry.SetValue(BaseKey,"ProxyEnable", Convert.ToInt32(newValue),RegistryValueKind.DWord);
-			APIWrapper.InternetOptionSettingsChanged();
+			return WinInetInterop.IsUseProxy();
+		}
+		#endregion
+
+		#region Get/Modify Current Active Auto Detect Proxy Flag
+		public static void ModifyCurrentActiveAutoDetectProxy(bool newValue)
+		{
+			WinInetInterop.SwitchAutoDetectProxy(newValue);
 		}
 
-		public static bool GetUseProxy()
+		public static bool GetCurrentActiveAutoDetectProxy()
 		{
-			return Convert.ToBoolean(Registry.GetValue(BaseKey, "ProxyEnable", false));
+			return WinInetInterop.IsAutoDetectProxy();
+		}
+		#endregion
+
+		#region Get/Modify Current Active Auto Config Proxy Flag
+		public static void ModifyCurrentActiveAutoConfigProxy(bool newValue)
+		{
+			WinInetInterop.SwitchAutoConfigProxy(newValue);
 		}
 
+		public static void ModifyCurrentActiveAutoConfigProxyURL(string autoConfigURL)
+		{
+			WinInetInterop.SetAutoConfigURL(autoConfigURL);
+		}
+
+		public static bool GetCurrentActiveAutoConfigProxy()
+		{
+			return WinInetInterop.IsAutoConfigProxy();
+		}
+		#endregion
+
+		#region Get Any Current Active Proxy Set
+		public static bool AnyCurrentActiveProxySet()
+		{
+			return WinInetInterop.IsAnyProxy();
+		}
+		#endregion
+
+		#region Get Current Active Auto Config Proxy URL
+		public static string GetCurrentActiveAutoConfigURL()
+		{
+			return WinInetInterop.GetAutoConfigURL();
+		}
+		#endregion
+
+		#region Get Current Active Proxy Server URLs
+		public static string GetCurrentActiveProxyServerURLs()
+		{
+			return WinInetInterop.GetProxyServerURL();
+		}
+		#endregion
+
+		#region Get Current Active Bypass Proxy 
+		public static string GetCurrentActiveBypassProxy()
+		{
+			return WinInetInterop.GetBypassProxy();
+		}
+		#endregion
+
+		#endregion
 	}
 
 }

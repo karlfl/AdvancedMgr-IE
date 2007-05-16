@@ -45,7 +45,7 @@ namespace Fleischmann.AdvancedProxy
 			this.txtUseProxyServerPort.Text = activeProxy.UseProxyServerPort;
 			this.ckbBypassProxyForLocal.Checked = activeProxy.BypassProxyForLocalAddress;
 
-			refreshFields();
+			enableFields();
 			this.Text = activeProxy.Name + " - " + this.Text;
 		} 
 		#endregion
@@ -63,6 +63,7 @@ namespace Fleischmann.AdvancedProxy
 		private void ckbUseAutoConfigScript_CheckedChanged(object sender, EventArgs e)
 		{
 			this.txtUseAutoConfigScriptAddress.Enabled = this.ckbUseAutoConfigScript.Checked;
+			validateAutoConfigureScript();
 		}
 		#endregion
 
@@ -72,7 +73,14 @@ namespace Fleischmann.AdvancedProxy
 			UpdateActiveProxySettings();
 			AdvancedDialog dlgAdvanced = new AdvancedDialog(activeProxy);
 			dlgAdvanced.ShowDialog(this);
-			refreshFields();
+
+			//update the things that could've changed on the advanced screen.
+			this.txtUseProxyServerAddress.Text = activeProxy.UseProxyServerAddress;
+			this.txtUseProxyServerPort.Text = activeProxy.UseProxyServerPort;
+			this.ckbBypassProxyForLocal.Checked = activeProxy.BypassProxyForLocalAddress;
+			this.ckbUseProxyServer.Checked = activeProxy.UseProxyServer;
+
+			enableFields();
 		}
 
 		private void btnOK_Click(object sender, EventArgs e)
@@ -83,8 +91,9 @@ namespace Fleischmann.AdvancedProxy
 		#endregion
 
 		#region Support methods
-		private void refreshFields()
+		private void enableFields()
 		{
+			//reset the enabled flags
 			bool useProxyEnabled = ckbUseProxyServer.Checked;
 			bool sameproxy = activeProxy.UseSameProxyServerForAllProtocols;
 			bool allProxyEmpty = (string.IsNullOrEmpty(activeProxy.HTTPProxyAddress) &&
@@ -99,10 +108,6 @@ namespace Fleischmann.AdvancedProxy
 
 			this.txtUseAutoConfigScriptAddress.Enabled = this.ckbUseAutoConfigScript.Checked;
 
-			//update the things that could've changed on the advanced screen.
-			this.txtUseProxyServerAddress.Text = activeProxy.UseProxyServerAddress;
-			this.txtUseProxyServerPort.Text = activeProxy.UseProxyServerPort;
-			this.ckbBypassProxyForLocal.Checked = activeProxy.BypassProxyForLocalAddress;
 		} 
 
 
@@ -116,23 +121,59 @@ namespace Fleischmann.AdvancedProxy
 			activeProxy.UseProxyServerAddress = this.txtUseProxyServerAddress.Text;
 			activeProxy.UseProxyServerPort = this.txtUseProxyServerPort.Text;
 
-			if (string.IsNullOrEmpty(activeProxy.HTTPProxyAddress))
+			if (this.txtUseProxyServerAddress.Enabled)
 			{
-				activeProxy.HTTPProxyAddress = this.txtUseProxyServerAddress.Text;
-				activeProxy.HTTPProxyPort = this.txtUseProxyServerPort.Text;
-				activeProxy.SecureProxyAddress = this.txtUseProxyServerAddress.Text;
-				activeProxy.SecureProxyPort = this.txtUseProxyServerPort.Text;
-				activeProxy.FTPProxyAddress = this.txtUseProxyServerAddress.Text;
-				activeProxy.FTPProxyPort = this.txtUseProxyServerPort.Text;
-				activeProxy.GopherProxyAddress = this.txtUseProxyServerAddress.Text;
-				activeProxy.GopherProxyPort = this.txtUseProxyServerPort.Text;
+				if (!string.IsNullOrEmpty(activeProxy.HTTPProxyAddress))
+				{
+					activeProxy.HTTPProxyAddress = this.txtUseProxyServerAddress.Text;
+					activeProxy.HTTPProxyPort = this.txtUseProxyServerPort.Text;
+				}
+				if (!string.IsNullOrEmpty(activeProxy.SecureProxyAddress))
+				{
+					activeProxy.SecureProxyAddress = this.txtUseProxyServerAddress.Text;
+					activeProxy.SecureProxyPort = this.txtUseProxyServerPort.Text;
+				}
+				if (!string.IsNullOrEmpty(activeProxy.FTPProxyAddress))
+				{
+					activeProxy.FTPProxyAddress = this.txtUseProxyServerAddress.Text;
+					activeProxy.FTPProxyPort = this.txtUseProxyServerPort.Text;
+				}
+				if (!string.IsNullOrEmpty(activeProxy.GopherProxyAddress))
+				{
+					activeProxy.GopherProxyAddress = this.txtUseProxyServerAddress.Text;
+					activeProxy.GopherProxyPort = this.txtUseProxyServerPort.Text;
+				}
+				activeProxy.UseSameProxyServerForAllProtocols = (!string.IsNullOrEmpty(this.txtUseProxyServerAddress.Text));
 			}
-			activeProxy.UseSameProxyServerForAllProtocols = (string.IsNullOrEmpty(this.txtUseProxyServerAddress.Text));
 
 			activeProxy.BypassProxyForLocalAddress = this.ckbBypassProxyForLocal.Checked;
 		}
 
 		#endregion
+
+		private void ckbUseAutoConfigScript_Validating(object sender, CancelEventArgs e)
+		{
+			validateAutoConfigureScript();
+
+		}
+
+		private void validateAutoConfigureScript()
+		{
+			if (ckbUseAutoConfigScript.Checked &&
+				string.IsNullOrEmpty(txtUseAutoConfigScriptAddress.Text))
+			{
+				lanFormErrorProvider.SetError(txtUseAutoConfigScriptAddress, "Must contain a URL of the Auto Configure Script");
+			}
+			else
+			{
+				lanFormErrorProvider.SetError(txtUseAutoConfigScriptAddress, "");
+			}
+		}
+
+		private void txtUseAutoConfigScriptAddress_TextChanged(object sender, EventArgs e)
+		{
+			validateAutoConfigureScript();
+		}
 
 
 	}

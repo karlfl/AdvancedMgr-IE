@@ -1,37 +1,50 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 9.00
 # Visual Studio 2005
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdvancedProxy", "AdvancedProxy\AdvancedProxy.csproj", "{D946F883-295B-4371-B022-42F72DB375F5}"
-EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Advanced Proxy Manager Setup", "Advanced Proxy Setup\Advanced Proxy Setup.vdproj", "{E975D919-DF36-4832-AA80-E113387BFC99}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
 EndProject
 Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "Advanced Proxy Installer", "Advanced Proxy Installer\Advanced Proxy Installer.wixproj", "{41E76195-F384-450F-8199-8375C8C18B7E}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdvancedProxy", "AdvancedProxy\AdvancedProxy.csproj", "{D946F883-295B-4371-B022-42F72DB375F5}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 4
+		SccNumberOfProjects = 3
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://tfs01.codeplex.com/
-		SccLocalPath0 = .
+		SccProjectUniqueName0 = Advanced\u0020Proxy\u0020Installer\\Advanced\u0020Proxy\u0020Installer.wixproj
+		SccProjectName0 = ../../Advanced\u0020Proxy\u0020Installer
+		SccAuxPath0 = https://tfs01.codeplex.com
+		SccLocalPath0 = Advanced\u0020Proxy\u0020Installer
+		SccProvider0 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccProjectUniqueName1 = AdvancedProxy\\AdvancedProxy.csproj
-		SccProjectName1 = AdvancedProxy
+		SccProjectName1 = ../../AdvancedProxy
+		SccAuxPath1 = https://tfs01.codeplex.com
 		SccLocalPath1 = AdvancedProxy
+		SccProvider1 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccProjectUniqueName2 = Advanced\u0020Proxy\u0020Setup\\Advanced\u0020Proxy\u0020Setup.vdproj
-		SccProjectName2 = Advanced\u0020Proxy\u0020Setup
+		SccProjectName2 = ../../Advanced\u0020Proxy\u0020Manager\u0020Setup
+		SccAuxPath2 = https://tfs01.codeplex.com
 		SccLocalPath2 = Advanced\u0020Proxy\u0020Setup
-		SccProjectUniqueName3 = Advanced\u0020Proxy\u0020Installer\\Advanced\u0020Proxy\u0020Installer.wixproj
-		SccProjectName3 = Advanced\u0020Proxy\u0020Installer
-		SccLocalPath3 = Advanced\u0020Proxy\u0020Installer
+		SccProvider2 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{D946F883-295B-4371-B022-42F72DB375F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D946F883-295B-4371-B022-42F72DB375F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D946F883-295B-4371-B022-42F72DB375F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D946F883-295B-4371-B022-42F72DB375F5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E975D919-DF36-4832-AA80-E113387BFC99}.Debug|Any CPU.ActiveCfg = Debug
 		{E975D919-DF36-4832-AA80-E113387BFC99}.Debug|Any CPU.Build.0 = Debug
 		{E975D919-DF36-4832-AA80-E113387BFC99}.Release|Any CPU.ActiveCfg = Release
@@ -39,6 +52,10 @@ Global
 		{41E76195-F384-450F-8199-8375C8C18B7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{41E76195-F384-450F-8199-8375C8C18B7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{41E76195-F384-450F-8199-8375C8C18B7E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D946F883-295B-4371-B022-42F72DB375F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D946F883-295B-4371-B022-42F72DB375F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D946F883-295B-4371-B022-42F72DB375F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D946F883-295B-4371-B022-42F72DB375F5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

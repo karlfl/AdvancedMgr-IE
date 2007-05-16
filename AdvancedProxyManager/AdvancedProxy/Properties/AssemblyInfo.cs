@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("karlfleischmann.com")]
 [assembly: AssemblyProduct("Advanced Proxy Manager")]
-[assembly: AssemblyCopyright("Copyright © karl fleischmann 2006")]
+[assembly: AssemblyCopyright("Copyright © karl fleischmann 2006-2007")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -29,5 +29,5 @@ using System.Runtime.InteropServices;
 //      Build Number
 //      Revision
 //
-[assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: AssemblyVersion("0.3.*")]
+[assembly: AssemblyFileVersion("0.3.*.*")]

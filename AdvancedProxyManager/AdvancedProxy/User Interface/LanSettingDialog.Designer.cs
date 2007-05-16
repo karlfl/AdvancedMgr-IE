@@ -28,6 +28,7 @@ namespace Fleischmann.AdvancedProxy
 		/// </summary>
 		private void InitializeComponent()
 		{
+			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LanSettingDialog));
 			this.gbxAutomaticConfiguration = new System.Windows.Forms.GroupBox();
 			this.label2 = new System.Windows.Forms.Label();
@@ -45,8 +46,10 @@ namespace Fleischmann.AdvancedProxy
 			this.ckbUseProxyServer = new System.Windows.Forms.CheckBox();
 			this.btnOK = new System.Windows.Forms.Button();
 			this.btnCancel = new System.Windows.Forms.Button();
+			this.lanFormErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
 			this.gbxAutomaticConfiguration.SuspendLayout();
 			this.gbxProxyServer.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.lanFormErrorProvider)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// gbxAutomaticConfiguration
@@ -78,6 +81,7 @@ namespace Fleischmann.AdvancedProxy
 			this.txtUseAutoConfigScriptAddress.Name = "txtUseAutoConfigScriptAddress";
 			this.txtUseAutoConfigScriptAddress.Size = new System.Drawing.Size(206, 20);
 			this.txtUseAutoConfigScriptAddress.TabIndex = 3;
+			this.txtUseAutoConfigScriptAddress.TextChanged += new System.EventHandler(this.txtUseAutoConfigScriptAddress_TextChanged);
 			// 
 			// ckbUseAutoConfigScript
 			// 
@@ -89,6 +93,7 @@ namespace Fleischmann.AdvancedProxy
 			this.ckbUseAutoConfigScript.Text = "Use Automatic Configuration Script";
 			this.ckbUseAutoConfigScript.UseVisualStyleBackColor = true;
 			this.ckbUseAutoConfigScript.CheckedChanged += new System.EventHandler(this.ckbUseAutoConfigScript_CheckedChanged);
+			this.ckbUseAutoConfigScript.Validating += new System.ComponentModel.CancelEventHandler(this.ckbUseAutoConfigScript_Validating);
 			// 
 			// ckbAutoDetectSettings
 			// 
@@ -209,6 +214,10 @@ namespace Fleischmann.AdvancedProxy
 			this.btnCancel.Text = "Cancel";
 			this.btnCancel.UseVisualStyleBackColor = true;
 			// 
+			// lanFormErrorProvider
+			// 
+			this.lanFormErrorProvider.ContainerControl = this;
+			// 
 			// LanSettingDialog
 			// 
 			this.AcceptButton = this.btnOK;
@@ -234,6 +243,7 @@ namespace Fleischmann.AdvancedProxy
 			this.gbxAutomaticConfiguration.PerformLayout();
 			this.gbxProxyServer.ResumeLayout(false);
 			this.gbxProxyServer.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.lanFormErrorProvider)).EndInit();
 			this.ResumeLayout(false);
 
 		}
@@ -256,6 +266,7 @@ namespace Fleischmann.AdvancedProxy
 		private System.Windows.Forms.TextBox txtUseProxyServerAddress;
 		private System.Windows.Forms.Button btnOK;
 		private System.Windows.Forms.Button btnCancel;
+		private System.Windows.Forms.ErrorProvider lanFormErrorProvider;
 	}
 }
 
