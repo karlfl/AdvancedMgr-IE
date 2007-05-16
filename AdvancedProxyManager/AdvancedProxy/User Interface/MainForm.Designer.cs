@@ -55,6 +55,24 @@ namespace Fleischmann.AdvancedProxy
 			this.btnAdd = new System.Windows.Forms.Button();
 			this.btnExit = new System.Windows.Forms.Button();
 			this.refreshIconTimer = new System.Windows.Forms.Timer(this.components);
+			this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
+			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+			this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.impoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+			this.exitToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+			this.proxyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.addToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+			this.setAsCurrentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.MenuProxySettingRightClick = new System.Windows.Forms.ContextMenuStrip(this.components);
+			this.copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.deleteToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+			this.editToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+			this.setAsCurrentToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
 			this.autoDetectSettingsDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
 			this.useAutoConfigureScriptDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
 			this.useAutoConfigureScriptAddressDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -77,6 +95,8 @@ namespace Fleischmann.AdvancedProxy
 			this.proxyBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			((System.ComponentModel.ISupportInitialize)(this.gridProxySettings)).BeginInit();
 			this.cxmNotifyIconMenu.SuspendLayout();
+			this.menuStrip1.SuspendLayout();
+			this.MenuProxySettingRightClick.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.proxyBindingSource)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -130,14 +150,15 @@ namespace Fleischmann.AdvancedProxy
 			dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
 			dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
 			this.gridProxySettings.DefaultCellStyle = dataGridViewCellStyle2;
-			this.gridProxySettings.Location = new System.Drawing.Point(12, 12);
+			this.gridProxySettings.Location = new System.Drawing.Point(12, 35);
 			this.gridProxySettings.Name = "gridProxySettings";
 			this.gridProxySettings.ReadOnly = true;
 			this.gridProxySettings.RowHeadersVisible = false;
 			this.gridProxySettings.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-			this.gridProxySettings.Size = new System.Drawing.Size(320, 216);
+			this.gridProxySettings.Size = new System.Drawing.Size(320, 232);
 			this.gridProxySettings.TabIndex = 0;
 			this.gridProxySettings.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridProxySettings_CellDoubleClick);
+			this.gridProxySettings.CellMouseUp += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.gridProxySettings_CellMouseUp);
 			// 
 			// ProxyConfigName
 			// 
@@ -159,7 +180,7 @@ namespace Fleischmann.AdvancedProxy
 			// 
 			this.icnProxyNotifyIcon.BalloonTipIcon = System.Windows.Forms.ToolTipIcon.Info;
 			this.icnProxyNotifyIcon.BalloonTipText = "Easily control all of Internet Explorer\'s Proxy Settings.";
-			this.icnProxyNotifyIcon.BalloonTipTitle = "Anvanced Proxy Configurations";
+			this.icnProxyNotifyIcon.BalloonTipTitle = "Advanced Proxy Configurations";
 			this.icnProxyNotifyIcon.ContextMenuStrip = this.cxmNotifyIconMenu;
 			this.icnProxyNotifyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("icnProxyNotifyIcon.Icon")));
 			this.icnProxyNotifyIcon.Text = "Advanced Proxy Manager";
@@ -181,7 +202,7 @@ namespace Fleischmann.AdvancedProxy
             this.autorunAtStartupToolStripMenuItem,
             this.exitToolStripMenuItem});
 			this.cxmNotifyIconMenu.Name = "cxmNotifyIconMenu";
-			this.cxmNotifyIconMenu.Size = new System.Drawing.Size(185, 220);
+			this.cxmNotifyIconMenu.Size = new System.Drawing.Size(185, 198);
 			this.cxmNotifyIconMenu.Text = "Advanced Proxy Manager";
 			this.cxmNotifyIconMenu.Opening += new System.ComponentModel.CancelEventHandler(this.cxmNotifyIconMenu_Opening);
 			// 
@@ -278,7 +299,7 @@ namespace Fleischmann.AdvancedProxy
 			// btnEdit
 			// 
 			this.btnEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.btnEdit.Location = new System.Drawing.Point(69, 233);
+			this.btnEdit.Location = new System.Drawing.Point(69, 272);
 			this.btnEdit.Name = "btnEdit";
 			this.btnEdit.Size = new System.Drawing.Size(47, 23);
 			this.btnEdit.TabIndex = 1;
@@ -289,7 +310,7 @@ namespace Fleischmann.AdvancedProxy
 			// btnSetAsCurrent
 			// 
 			this.btnSetAsCurrent.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.btnSetAsCurrent.Location = new System.Drawing.Point(180, 233);
+			this.btnSetAsCurrent.Location = new System.Drawing.Point(180, 272);
 			this.btnSetAsCurrent.Name = "btnSetAsCurrent";
 			this.btnSetAsCurrent.Size = new System.Drawing.Size(95, 23);
 			this.btnSetAsCurrent.TabIndex = 2;
@@ -300,7 +321,7 @@ namespace Fleischmann.AdvancedProxy
 			// btnDelete
 			// 
 			this.btnDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.btnDelete.Location = new System.Drawing.Point(121, 233);
+			this.btnDelete.Location = new System.Drawing.Point(121, 272);
 			this.btnDelete.Name = "btnDelete";
 			this.btnDelete.Size = new System.Drawing.Size(52, 23);
 			this.btnDelete.TabIndex = 4;
@@ -311,7 +332,7 @@ namespace Fleischmann.AdvancedProxy
 			// btnAdd
 			// 
 			this.btnAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.btnAdd.Location = new System.Drawing.Point(11, 233);
+			this.btnAdd.Location = new System.Drawing.Point(11, 272);
 			this.btnAdd.Name = "btnAdd";
 			this.btnAdd.Size = new System.Drawing.Size(52, 23);
 			this.btnAdd.TabIndex = 5;
@@ -322,7 +343,7 @@ namespace Fleischmann.AdvancedProxy
 			// btnExit
 			// 
 			this.btnExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnExit.Location = new System.Drawing.Point(285, 233);
+			this.btnExit.Location = new System.Drawing.Point(285, 272);
 			this.btnExit.Name = "btnExit";
 			this.btnExit.Size = new System.Drawing.Size(49, 23);
 			this.btnExit.TabIndex = 3;
@@ -335,6 +356,137 @@ namespace Fleischmann.AdvancedProxy
 			this.refreshIconTimer.Enabled = true;
 			this.refreshIconTimer.Interval = 1000;
 			this.refreshIconTimer.Tick += new System.EventHandler(this.refreshIconTimer_Tick);
+			// 
+			// menuStrip1
+			// 
+			this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileToolStripMenuItem,
+            this.proxyToolStripMenuItem});
+			this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+			this.menuStrip1.Name = "menuStrip1";
+			this.menuStrip1.Size = new System.Drawing.Size(344, 24);
+			this.menuStrip1.TabIndex = 6;
+			this.menuStrip1.Text = "menuStrip1";
+			// 
+			// fileToolStripMenuItem
+			// 
+			this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.impoToolStripMenuItem,
+            this.exportToolStripMenuItem,
+            this.toolStripSeparator4,
+            this.exitToolStripMenuItem1});
+			this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+			this.fileToolStripMenuItem.Size = new System.Drawing.Size(35, 20);
+			this.fileToolStripMenuItem.Text = "&File";
+			// 
+			// impoToolStripMenuItem
+			// 
+			this.impoToolStripMenuItem.Name = "impoToolStripMenuItem";
+			this.impoToolStripMenuItem.Size = new System.Drawing.Size(106, 22);
+			this.impoToolStripMenuItem.Text = "&Import";
+			// 
+			// exportToolStripMenuItem
+			// 
+			this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
+			this.exportToolStripMenuItem.Size = new System.Drawing.Size(106, 22);
+			this.exportToolStripMenuItem.Text = "&Export";
+			// 
+			// toolStripSeparator4
+			// 
+			this.toolStripSeparator4.Name = "toolStripSeparator4";
+			this.toolStripSeparator4.Size = new System.Drawing.Size(103, 6);
+			// 
+			// exitToolStripMenuItem1
+			// 
+			this.exitToolStripMenuItem1.Name = "exitToolStripMenuItem1";
+			this.exitToolStripMenuItem1.Size = new System.Drawing.Size(106, 22);
+			this.exitToolStripMenuItem1.Text = "E&xit";
+			this.exitToolStripMenuItem1.Click += new System.EventHandler(this.btnExit_Click);
+			// 
+			// proxyToolStripMenuItem
+			// 
+			this.proxyToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.addToolStripMenuItem,
+            this.editToolStripMenuItem,
+            this.deleteToolStripMenuItem,
+            this.toolStripSeparator5,
+            this.setAsCurrentToolStripMenuItem});
+			this.proxyToolStripMenuItem.Name = "proxyToolStripMenuItem";
+			this.proxyToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
+			this.proxyToolStripMenuItem.Text = "&Proxy";
+			// 
+			// addToolStripMenuItem
+			// 
+			this.addToolStripMenuItem.Name = "addToolStripMenuItem";
+			this.addToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+			this.addToolStripMenuItem.Text = "&Add";
+			this.addToolStripMenuItem.Click += new System.EventHandler(this.btnAdd_Click);
+			// 
+			// editToolStripMenuItem
+			// 
+			this.editToolStripMenuItem.Name = "editToolStripMenuItem";
+			this.editToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+			this.editToolStripMenuItem.Text = "&Edit";
+			this.editToolStripMenuItem.Click += new System.EventHandler(this.btnEdit_Click);
+			// 
+			// deleteToolStripMenuItem
+			// 
+			this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
+			this.deleteToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+			this.deleteToolStripMenuItem.Text = "&Delete";
+			this.deleteToolStripMenuItem.Click += new System.EventHandler(this.btnDelete_Click);
+			// 
+			// toolStripSeparator5
+			// 
+			this.toolStripSeparator5.Name = "toolStripSeparator5";
+			this.toolStripSeparator5.Size = new System.Drawing.Size(141, 6);
+			// 
+			// setAsCurrentToolStripMenuItem
+			// 
+			this.setAsCurrentToolStripMenuItem.Name = "setAsCurrentToolStripMenuItem";
+			this.setAsCurrentToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+			this.setAsCurrentToolStripMenuItem.Text = "Set as Current";
+			this.setAsCurrentToolStripMenuItem.Click += new System.EventHandler(this.btnSetAsCurrent_Click);
+			// 
+			// MenuProxySettingRightClick
+			// 
+			this.MenuProxySettingRightClick.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.copyToolStripMenuItem,
+            this.deleteToolStripMenuItem1,
+            this.editToolStripMenuItem1,
+            this.setAsCurrentToolStripMenuItem1});
+			this.MenuProxySettingRightClick.Name = "MenuProxySettingRightClick";
+			this.MenuProxySettingRightClick.ShowImageMargin = false;
+			this.MenuProxySettingRightClick.Size = new System.Drawing.Size(131, 114);
+			// 
+			// copyToolStripMenuItem
+			// 
+			this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
+			this.copyToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
+			this.copyToolStripMenuItem.Text = "C&opy";
+			this.copyToolStripMenuItem.Click += new System.EventHandler(this.copyToolStripMenuItem_Click);
+			// 
+			// deleteToolStripMenuItem1
+			// 
+			this.deleteToolStripMenuItem1.Name = "deleteToolStripMenuItem1";
+			this.deleteToolStripMenuItem1.Size = new System.Drawing.Size(130, 22);
+			this.deleteToolStripMenuItem1.Text = "&Delete";
+			this.deleteToolStripMenuItem1.Click += new System.EventHandler(this.btnDelete_Click);
+			// 
+			// editToolStripMenuItem1
+			// 
+			this.editToolStripMenuItem1.Name = "editToolStripMenuItem1";
+			this.editToolStripMenuItem1.Size = new System.Drawing.Size(130, 22);
+			this.editToolStripMenuItem1.Text = "&Edit";
+			this.editToolStripMenuItem1.Click += new System.EventHandler(this.btnEdit_Click);
+			// 
+			// setAsCurrentToolStripMenuItem1
+			// 
+			this.setAsCurrentToolStripMenuItem1.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+			this.setAsCurrentToolStripMenuItem1.Name = "setAsCurrentToolStripMenuItem1";
+			this.setAsCurrentToolStripMenuItem1.Size = new System.Drawing.Size(130, 22);
+			this.setAsCurrentToolStripMenuItem1.Text = "&Set as Current";
+			this.setAsCurrentToolStripMenuItem1.Click += new System.EventHandler(this.btnSetAsCurrent_Click);
 			// 
 			// autoDetectSettingsDataGridViewCheckBoxColumn
 			// 
@@ -496,7 +648,8 @@ namespace Fleischmann.AdvancedProxy
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(344, 268);
+			this.ClientSize = new System.Drawing.Size(344, 307);
+			this.Controls.Add(this.menuStrip1);
 			this.Controls.Add(this.btnAdd);
 			this.Controls.Add(this.btnDelete);
 			this.Controls.Add(this.btnEdit);
@@ -504,6 +657,7 @@ namespace Fleischmann.AdvancedProxy
 			this.Controls.Add(this.btnSetAsCurrent);
 			this.Controls.Add(this.gridProxySettings);
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+			this.MainMenuStrip = this.menuStrip1;
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
 			this.Name = "MainForm";
@@ -513,8 +667,12 @@ namespace Fleischmann.AdvancedProxy
 			this.Load += new System.EventHandler(this.MainForm_Load);
 			((System.ComponentModel.ISupportInitialize)(this.gridProxySettings)).EndInit();
 			this.cxmNotifyIconMenu.ResumeLayout(false);
+			this.menuStrip1.ResumeLayout(false);
+			this.menuStrip1.PerformLayout();
+			this.MenuProxySettingRightClick.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.proxyBindingSource)).EndInit();
 			this.ResumeLayout(false);
+			this.PerformLayout();
 
 		}
 
@@ -563,6 +721,24 @@ namespace Fleischmann.AdvancedProxy
 		private System.Windows.Forms.ToolStripMenuItem useAutoDetectProxyToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem useAutoConfigProxyToolStripMenuItem;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+		private System.Windows.Forms.SaveFileDialog saveFileDialog;
+		private System.Windows.Forms.MenuStrip menuStrip1;
+		private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem impoToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem exportToolStripMenuItem;
+		private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
+		private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem1;
+		private System.Windows.Forms.ToolStripMenuItem proxyToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem addToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
+		private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
+		private System.Windows.Forms.ToolStripMenuItem setAsCurrentToolStripMenuItem;
+		private System.Windows.Forms.ContextMenuStrip MenuProxySettingRightClick;
+		private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem1;
+		private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem1;
+		private System.Windows.Forms.ToolStripMenuItem setAsCurrentToolStripMenuItem1;
+		private System.Windows.Forms.ToolStripMenuItem copyToolStripMenuItem;
 
 	}
 }
