@@ -53,11 +53,7 @@ namespace Fleischmann.AdvancedProxy
 		#region On Changed Events
 		private void ckbUseProxyServer_CheckedChanged(object sender, EventArgs e)
 		{
-			bool enabled = ckbUseProxyServer.Checked;
-			this.txtUseProxyServerAddress.Enabled = enabled;
-			this.txtUseProxyServerPort.Enabled = enabled;
-			this.btnAdvanced.Enabled = enabled;
-			this.ckbBypassProxyForLocal.Enabled = enabled;
+			enableFields();
 		} 
 
 		private void ckbUseAutoConfigScript_CheckedChanged(object sender, EventArgs e)
