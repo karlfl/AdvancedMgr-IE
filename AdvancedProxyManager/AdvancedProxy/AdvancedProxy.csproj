@@ -43,11 +43,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class Files\Configuration\ProxyURLCollection.cs" />
     <Compile Include="Class Files\Configuration\ProxyDefinitionSection.cs" />
     <Compile Include="Class Files\Configuration\ProxyElement.cs" />
     <Compile Include="Class Files\Configuration\ProxyElementCollection.cs" />
     <Compile Include="Class Files\Configuration\ProxyURL.cs" />
+    <Compile Include="Class Files\Configuration\ProxyURLCollection.cs" />
     <Compile Include="Class Files\Utility\WinInetInterop.cs" />
     <Compile Include="User Interface\AdvancedDialog.cs">
       <SubType>Form</SubType>
