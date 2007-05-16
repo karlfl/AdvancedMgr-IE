@@ -10,9 +10,9 @@ namespace Fleischmann.AdvancedProxy
 {
 	public partial class ProxyNamePromptDialog : Form
 	{
-		private List<ProxySetting> _proxyList;
+		private SortableBindingList<ProxySetting> _proxyList;
 		private bool _nameError;
-		public ProxyNamePromptDialog(List<ProxySetting> proxyList)
+		public ProxyNamePromptDialog(SortableBindingList<ProxySetting> proxyList)
 		{
 			InitializeComponent();
 			_proxyList = proxyList;

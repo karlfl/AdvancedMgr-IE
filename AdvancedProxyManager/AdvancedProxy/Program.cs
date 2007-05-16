@@ -28,7 +28,7 @@ namespace Fleischmann.AdvancedProxy
 				Application.EnableVisualStyles();
 				Application.SetCompatibleTextRenderingDefault(false);
 
-				List<ProxySetting> proxyList = new List<ProxySetting>();
+				SortableBindingList<ProxySetting> proxyList = new SortableBindingList<ProxySetting>();
 
 				//Get all proxies defined in the config file.
 				ProxyDefinitionSection section = (ProxyDefinitionSection)ConfigurationManager.GetSection("ProxyDefinition");
