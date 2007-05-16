@@ -144,11 +144,9 @@ namespace Fleischmann.AdvancedProxy
 				if (result == DialogResult.OK)
 				{
 					//don't add it until they've entered the data for it and saved it.
+					newProxy.SaveInConfigFile();
 					_proxyList.Add(newProxy);
 					_proxyList.Sort();
-					//this.gridProxySettings.DataSource = null;
-					//this.gridProxySettings.DataSource = _proxyList;
-					//this.gridProxySettings.Refresh();
 				}
 			}
 		}
@@ -175,12 +173,9 @@ namespace Fleischmann.AdvancedProxy
 			DialogResult result = MessageBox.Show(this,"Are you sure you want to delete the \"" + selectedProxy.Name + "\" proxy setting?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 			if (result == DialogResult.Yes)
 			{
-//				this.gridProxySettings.DataSource = null;
 				selectedProxy.DeleteFromConfig();
 				_proxyList.Remove(selectedProxy);
 				_proxyList.Sort();
-//				this.gridProxySettings.DataSource = _proxyList;
-//				this.gridProxySettings.Refresh();
 			}
 		}
 
@@ -234,11 +229,6 @@ namespace Fleischmann.AdvancedProxy
 				newProxy.SaveInConfigFile();
 				_proxyList.Add(newProxy);
 				_proxyList.Sort();
-
-				//refresh the grid.
-				//this.gridProxySettings.DataSource = null; //clear grid first.
-				//this.gridProxySettings.DataSource = _proxyList;
-				//this.gridProxySettings.Refresh();
 			}
 
 		}
