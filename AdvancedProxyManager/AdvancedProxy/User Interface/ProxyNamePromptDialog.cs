@@ -50,5 +50,16 @@ namespace Fleischmann.AdvancedProxy
 			return _nameError;
 		}
 
+		private void ProxyNamePromptDialog_Load(object sender, EventArgs e)
+		{
+			int counter = 0;
+			while (DuplicateName())
+			{
+				counter++;
+				this.txtName.Text = this.txtName.Text + counter;
+			}
+
+		}
+
 	}
 }

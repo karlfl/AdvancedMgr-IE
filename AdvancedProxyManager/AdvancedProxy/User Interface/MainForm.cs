@@ -219,7 +219,7 @@ namespace Fleischmann.AdvancedProxy
 			ProxySetting selectedProxy = (ProxySetting)this.gridProxySettings.SelectedRows[0].DataBoundItem;
 			ProxySetting newProxy = selectedProxy.Clone();
 			ProxyNamePromptDialog dlgNamePrompt = new ProxyNamePromptDialog(_proxyList);
-			dlgNamePrompt.txtName.Text = selectedProxy.Name + "_copy";
+			dlgNamePrompt.txtName.Text = selectedProxy.Name;
 			DialogResult result = dlgNamePrompt.ShowDialog();
 			if (result == DialogResult.OK)
 			{
@@ -486,6 +486,20 @@ namespace Fleischmann.AdvancedProxy
 			}
 		} 
 		#endregion 
+
+		private void captureCurrentIESettingsToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			ProxySetting currentRegistryProxy = ProxySetting.GetCurrentProxyFromInternetExplorer();
+			ProxyNamePromptDialog dlgNamePrompt = new ProxyNamePromptDialog(_proxyList);
+			dlgNamePrompt.txtName.Text = "Current IE Proxy Settings";
+			DialogResult result = dlgNamePrompt.ShowDialog();
+			if (result == DialogResult.OK)
+			{
+				currentRegistryProxy.Name = dlgNamePrompt.txtName.Text;
+				currentRegistryProxy.SaveInConfigFile();
+				_proxyList.Add(currentRegistryProxy);
+			}
+		}
 
 	}
 }

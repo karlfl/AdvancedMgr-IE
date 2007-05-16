@@ -97,6 +97,7 @@ namespace Fleischmann.AdvancedProxy
 			this.ShowInTaskbar = false;
 			this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
 			this.Text = "New Proxy Setting Name";
+			this.Load += new System.EventHandler(this.ProxyNamePromptDialog_Load);
 			((System.ComponentModel.ISupportInitialize)(this.proxyNameErrorProvider)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();

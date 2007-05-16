@@ -29,8 +29,8 @@ namespace Fleischmann.AdvancedProxy
 		private void InitializeComponent()
 		{
 			this.components = new System.ComponentModel.Container();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
 			this.gridProxySettings = new System.Windows.Forms.DataGridView();
 			this.ProxyConfigName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -93,6 +93,7 @@ namespace Fleischmann.AdvancedProxy
 			this.deleteToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
 			this.editToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
 			this.setAsCurrentToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+			this.captureCurrentIESettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			((System.ComponentModel.ISupportInitialize)(this.gridProxySettings)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.proxyBindingSource)).BeginInit();
 			this.cxmNotifyIconMenu.SuspendLayout();
@@ -110,14 +111,14 @@ namespace Fleischmann.AdvancedProxy
 						| System.Windows.Forms.AnchorStyles.Left)
 						| System.Windows.Forms.AnchorStyles.Right)));
 			this.gridProxySettings.AutoGenerateColumns = false;
-			dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-			dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-			dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-			dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-			dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-			dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-			this.gridProxySettings.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+			dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
+			dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
+			dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+			this.gridProxySettings.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
 			this.gridProxySettings.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.gridProxySettings.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ProxyConfigName,
@@ -142,14 +143,14 @@ namespace Fleischmann.AdvancedProxy
             this.useSameProxyServerForAllProtocolsDataGridViewCheckBoxColumn,
             this.excludeAddressesFromProxyDataGridViewTextBoxColumn});
 			this.gridProxySettings.DataSource = this.proxyBindingSource;
-			dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-			dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-			dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-			dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-			dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-			dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-			this.gridProxySettings.DefaultCellStyle = dataGridViewCellStyle2;
+			dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+			dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
+			dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+			this.gridProxySettings.DefaultCellStyle = dataGridViewCellStyle6;
 			this.gridProxySettings.Location = new System.Drawing.Point(12, 35);
 			this.gridProxySettings.MultiSelect = false;
 			this.gridProxySettings.Name = "gridProxySettings";
@@ -567,7 +568,8 @@ namespace Fleischmann.AdvancedProxy
             this.editToolStripMenuItem,
             this.deleteToolStripMenuItem,
             this.toolStripSeparator5,
-            this.setAsCurrentToolStripMenuItem});
+            this.setAsCurrentToolStripMenuItem,
+            this.captureCurrentIESettingsToolStripMenuItem});
 			this.proxyToolStripMenuItem.Name = "proxyToolStripMenuItem";
 			this.proxyToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
 			this.proxyToolStripMenuItem.Text = "&Proxy";
@@ -575,33 +577,33 @@ namespace Fleischmann.AdvancedProxy
 			// addToolStripMenuItem
 			// 
 			this.addToolStripMenuItem.Name = "addToolStripMenuItem";
-			this.addToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+			this.addToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
 			this.addToolStripMenuItem.Text = "&Add";
 			this.addToolStripMenuItem.Click += new System.EventHandler(this.btnAdd_Click);
 			// 
 			// editToolStripMenuItem
 			// 
 			this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-			this.editToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+			this.editToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
 			this.editToolStripMenuItem.Text = "&Edit";
 			this.editToolStripMenuItem.Click += new System.EventHandler(this.btnEdit_Click);
 			// 
 			// deleteToolStripMenuItem
 			// 
 			this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-			this.deleteToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+			this.deleteToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
 			this.deleteToolStripMenuItem.Text = "&Delete";
 			this.deleteToolStripMenuItem.Click += new System.EventHandler(this.btnDelete_Click);
 			// 
 			// toolStripSeparator5
 			// 
 			this.toolStripSeparator5.Name = "toolStripSeparator5";
-			this.toolStripSeparator5.Size = new System.Drawing.Size(141, 6);
+			this.toolStripSeparator5.Size = new System.Drawing.Size(149, 6);
 			// 
 			// setAsCurrentToolStripMenuItem
 			// 
 			this.setAsCurrentToolStripMenuItem.Name = "setAsCurrentToolStripMenuItem";
-			this.setAsCurrentToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+			this.setAsCurrentToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
 			this.setAsCurrentToolStripMenuItem.Text = "Set as Current";
 			this.setAsCurrentToolStripMenuItem.Click += new System.EventHandler(this.btnSetAsCurrent_Click);
 			// 
@@ -644,6 +646,14 @@ namespace Fleischmann.AdvancedProxy
 			this.setAsCurrentToolStripMenuItem1.Size = new System.Drawing.Size(130, 22);
 			this.setAsCurrentToolStripMenuItem1.Text = "&Set as Current";
 			this.setAsCurrentToolStripMenuItem1.Click += new System.EventHandler(this.btnSetAsCurrent_Click);
+			// 
+			// captureCurrentIESettingsToolStripMenuItem
+			// 
+			this.captureCurrentIESettingsToolStripMenuItem.Name = "captureCurrentIESettingsToolStripMenuItem";
+			this.captureCurrentIESettingsToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
+			this.captureCurrentIESettingsToolStripMenuItem.Text = "Capture IE Proxy";
+			this.captureCurrentIESettingsToolStripMenuItem.ToolTipText = "Captures the current proxy settings in IE and creates a new Proxy Setting.";
+			this.captureCurrentIESettingsToolStripMenuItem.Click += new System.EventHandler(this.captureCurrentIESettingsToolStripMenuItem_Click);
 			// 
 			// MainForm
 			// 
@@ -740,6 +750,7 @@ namespace Fleischmann.AdvancedProxy
 		private System.Windows.Forms.DataGridViewTextBoxColumn socksProxyPortDataGridViewTextBoxColumn;
 		private System.Windows.Forms.DataGridViewCheckBoxColumn useSameProxyServerForAllProtocolsDataGridViewCheckBoxColumn;
 		private System.Windows.Forms.DataGridViewTextBoxColumn excludeAddressesFromProxyDataGridViewTextBoxColumn;
+		private System.Windows.Forms.ToolStripMenuItem captureCurrentIESettingsToolStripMenuItem;
 
 	}
 }
