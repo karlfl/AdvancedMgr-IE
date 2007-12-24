@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Reflection;
 using System.Text;
 
@@ -11,11 +13,11 @@ namespace Fleischmann.AdvancedProxy
 	/// Found in MSDN Forums 
 	/// http://forums.microsoft.com/MSDN/ShowPost.aspx?PostID=65826&SiteID=1
 	/// 
-	/// Joe States...
+	/// Joe states...
 	/// BindingList<T> does not directly support sorting, however you can 
 	/// sub-class it to provide this behavior.  The following article has a 
 	/// sample of a sub-classed BindingList<T> that provides sorting:
-	///    http://msdn.microsoft.com/library/default.asp?url=/library/en-us/dnforms/html/winforms11162004.asp
+	///    http://msdn2.microsoft.com/en-us/library/ms993236.aspx
 	/// 
 	/// </summary>
 	[Serializable()]
@@ -118,6 +120,38 @@ namespace Fleischmann.AdvancedProxy
 			return prop;
 		}
 		#endregion
+
+		public void Save(string filename)
+		{
+			BinaryFormatter formatter = new BinaryFormatter();
+			using (FileStream stream =
+			  new FileStream(filename, FileMode.Create))
+			{
+				// Serialize data list items
+				formatter.Serialize(stream, (List<T>)this.Items);
+			}
+		}
+
+		public void Load(string filename)
+		{
+			this.ClearItems();
+			if (File.Exists(filename))
+			{
+				BinaryFormatter formatter = new BinaryFormatter();
+				using (FileStream stream =
+				  new FileStream(filename, FileMode.Open))
+				{
+					// Deserialize data list items
+					((List<T>)this.Items).AddRange(
+					  (IEnumerable<T>)formatter.Deserialize(stream));
+				}
+			}
+
+			// Let bound controls know they should refresh their views
+			this.OnListChanged(
+			  new ListChangedEventArgs(ListChangedType.Reset, -1));
+		}
+
 
 		#region PropertyComparer<TKey>
 		internal class PropertyComparer<TKey> : System.Collections.Generic.IComparer<TKey>

@@ -13,7 +13,8 @@
     <SccLocalPath>SAK</SccLocalPath>
     <SccAuxPath>SAK</SccAuxPath>
     <SccProvider>SAK</SccProvider>
-    <ApplicationIcon>Icons\Enabled.ico</ApplicationIcon>
+    <ApplicationIcon>
+    </ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -50,6 +51,11 @@
     <Compile Include="Class Files\Configuration\ProxyURLCollection.cs" />
     <Compile Include="Class Files\Utility\SortableBindingList.cs" />
     <Compile Include="Class Files\Utility\WinInetInterop.cs" />
+    <Compile Include="Resource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resource.resx</DependentUpon>
+    </Compile>
     <Compile Include="User Interface\AdvancedDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -61,6 +67,18 @@
     </Compile>
     <Compile Include="User Interface\AutoConfigScriptPromptForm.Designer.cs">
       <DependentUpon>AutoConfigScriptPromptForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="User Interface\ExportForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="User Interface\ExportForm.Designer.cs">
+      <DependentUpon>ExportForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="User Interface\ImportForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="User Interface\ImportForm.Designer.cs">
+      <DependentUpon>ImportForm.cs</DependentUpon>
     </Compile>
     <Compile Include="User Interface\LanSettingDialog.cs">
       <SubType>Form</SubType>
@@ -76,6 +94,11 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Resource.resx">
+      <SubType>Designer</SubType>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="User Interface\AdvancedDialog.resx">
       <SubType>Designer</SubType>
       <DependentUpon>AdvancedDialog.cs</DependentUpon>
@@ -83,6 +106,14 @@
     <EmbeddedResource Include="User Interface\AutoConfigScriptPromptForm.resx">
       <SubType>Designer</SubType>
       <DependentUpon>AutoConfigScriptPromptForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="User Interface\ExportForm.resx">
+      <DependentUpon>ExportForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="User Interface\ImportForm.resx">
+      <DependentUpon>ImportForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="User Interface\LanSettingDialog.resx">
       <SubType>Designer</SubType>
@@ -127,10 +158,6 @@
     <Compile Include="User Interface\ProxyNamePromptDialog.designer.cs">
       <DependentUpon>ProxyNamePromptDialog.cs</DependentUpon>
     </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Icons\Enabled.ico" />
-    <Content Include="Icons\Disabled.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

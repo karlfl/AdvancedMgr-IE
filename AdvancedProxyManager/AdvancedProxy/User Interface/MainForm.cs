@@ -24,8 +24,8 @@ namespace Fleischmann.AdvancedProxy
 	public partial class MainForm : Form
 	{
 		#region Private Fields
-		private Icon enabledIcon = new Icon(Application.StartupPath + "\\Enabled.ico");
-		private Icon disabledIcon = new Icon(Application.StartupPath + "\\Disabled.ico");
+		private Icon enabledIcon = Resource.Enabled; //new Icon(Application.StartupPath + "\\icons\\Enabled.ico");
+        private Icon disabledIcon = Resource.Disabled; //new Icon(Application.StartupPath + "\\Disabled.ico");
 
 		private const string BaseAutoRunKey = "Software\\Microsoft\\Windows\\CurrentVersion\\Run";
 
@@ -498,7 +498,34 @@ namespace Fleischmann.AdvancedProxy
 				currentRegistryProxy.Name = dlgNamePrompt.txtName.Text;
 				currentRegistryProxy.SaveInConfigFile();
 				_proxyList.Add(currentRegistryProxy);
+				_proxyList.Sort();
 			}
+		}
+
+		private void exportToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			ExportForm frmExport = new ExportForm(_proxyList);
+			DialogResult result = frmExport.ShowDialog();
+		}
+
+		private void importToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			openFileDialog.Multiselect = false;
+			DialogResult result = openFileDialog.ShowDialog(this);
+			if (result == DialogResult.OK)
+			{
+				ImportForm frmImport = new ImportForm(openFileDialog.FileName);
+				frmImport.ShowDialog();
+				SortableBindingList<ProxySetting> itemsToAdd = frmImport.ProxyListToImport;
+				foreach (ProxySetting proxy in itemsToAdd)
+				{
+					proxy.SaveInConfigFile();
+					_proxyList.Add(proxy);
+				}
+				_proxyList.Sort();
+			}
+
+
 		}
 
 	}

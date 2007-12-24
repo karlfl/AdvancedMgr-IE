@@ -19,6 +19,7 @@ namespace Fleischmann.AdvancedProxy
 	/// <summary>
 	/// Copyright karl fleischmann 2006-2007
 	/// </summary>
+	[Serializable]
 	public class ProxySetting
 	{
 		#region Properties

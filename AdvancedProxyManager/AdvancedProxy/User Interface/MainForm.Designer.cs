@@ -29,32 +29,12 @@ namespace Fleischmann.AdvancedProxy
 		private void InitializeComponent()
 		{
 			this.components = new System.ComponentModel.Container();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
 			this.gridProxySettings = new System.Windows.Forms.DataGridView();
 			this.ProxyConfigName = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.ProxyConfigDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.autoDetectSettingsDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-			this.useAutoConfigureScriptDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-			this.useAutoConfigureScriptAddressDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.useProxyServerDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-			this.bypassProxyForLocalAddressDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-			this.useProxyServerAddressDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.useProxyServerPortDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.hTTPProxyAddressDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.hTTPProxyPortDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.secureProxyAddressDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.secureProxyPortDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.fTPProxyAddressDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.fTPProxyPortDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.gopherProxyAddressDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.gopherProxyPortDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.socksProxyAddressDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.socksProxyPortDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.useSameProxyServerForAllProtocolsDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-			this.excludeAddressesFromProxyDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.proxyBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			this.icnProxyNotifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
 			this.cxmNotifyIconMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.configureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -78,7 +58,7 @@ namespace Fleischmann.AdvancedProxy
 			this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
 			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
 			this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.impoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.importToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
 			this.exitToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -88,17 +68,38 @@ namespace Fleischmann.AdvancedProxy
 			this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
 			this.setAsCurrentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.captureCurrentIESettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.MenuProxySettingRightClick = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.deleteToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
 			this.editToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
 			this.setAsCurrentToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-			this.captureCurrentIESettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
+			this.autoDetectSettingsDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+			this.useAutoConfigureScriptDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+			this.useAutoConfigureScriptAddressDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.useProxyServerDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+			this.bypassProxyForLocalAddressDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+			this.useProxyServerAddressDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.useProxyServerPortDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.hTTPProxyAddressDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.hTTPProxyPortDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.secureProxyAddressDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.secureProxyPortDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.fTPProxyAddressDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.fTPProxyPortDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.gopherProxyAddressDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.gopherProxyPortDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.socksProxyAddressDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.socksProxyPortDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.useSameProxyServerForAllProtocolsDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+			this.excludeAddressesFromProxyDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.proxyBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			((System.ComponentModel.ISupportInitialize)(this.gridProxySettings)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.proxyBindingSource)).BeginInit();
 			this.cxmNotifyIconMenu.SuspendLayout();
 			this.menuStrip1.SuspendLayout();
 			this.MenuProxySettingRightClick.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.proxyBindingSource)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// gridProxySettings
@@ -111,14 +112,14 @@ namespace Fleischmann.AdvancedProxy
 						| System.Windows.Forms.AnchorStyles.Left)
 						| System.Windows.Forms.AnchorStyles.Right)));
 			this.gridProxySettings.AutoGenerateColumns = false;
-			dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-			dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
-			dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
-			dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-			dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-			dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-			this.gridProxySettings.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+			dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+			dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+			dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+			this.gridProxySettings.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
 			this.gridProxySettings.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.gridProxySettings.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ProxyConfigName,
@@ -143,14 +144,14 @@ namespace Fleischmann.AdvancedProxy
             this.useSameProxyServerForAllProtocolsDataGridViewCheckBoxColumn,
             this.excludeAddressesFromProxyDataGridViewTextBoxColumn});
 			this.gridProxySettings.DataSource = this.proxyBindingSource;
-			dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-			dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
-			dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
-			dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-			dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-			dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-			this.gridProxySettings.DefaultCellStyle = dataGridViewCellStyle6;
+			dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+			dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+			dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+			this.gridProxySettings.DefaultCellStyle = dataGridViewCellStyle4;
 			this.gridProxySettings.Location = new System.Drawing.Point(12, 35);
 			this.gridProxySettings.MultiSelect = false;
 			this.gridProxySettings.Name = "gridProxySettings";
@@ -177,162 +178,6 @@ namespace Fleischmann.AdvancedProxy
 			this.ProxyConfigDescription.Name = "ProxyConfigDescription";
 			this.ProxyConfigDescription.ReadOnly = true;
 			this.ProxyConfigDescription.Visible = false;
-			// 
-			// autoDetectSettingsDataGridViewCheckBoxColumn
-			// 
-			this.autoDetectSettingsDataGridViewCheckBoxColumn.DataPropertyName = "AutoDetectSettings";
-			this.autoDetectSettingsDataGridViewCheckBoxColumn.HeaderText = "AutoDetectSettings";
-			this.autoDetectSettingsDataGridViewCheckBoxColumn.Name = "autoDetectSettingsDataGridViewCheckBoxColumn";
-			this.autoDetectSettingsDataGridViewCheckBoxColumn.ReadOnly = true;
-			this.autoDetectSettingsDataGridViewCheckBoxColumn.Visible = false;
-			// 
-			// useAutoConfigureScriptDataGridViewCheckBoxColumn
-			// 
-			this.useAutoConfigureScriptDataGridViewCheckBoxColumn.DataPropertyName = "UseAutoConfigureScript";
-			this.useAutoConfigureScriptDataGridViewCheckBoxColumn.HeaderText = "UseAutoConfigureScript";
-			this.useAutoConfigureScriptDataGridViewCheckBoxColumn.Name = "useAutoConfigureScriptDataGridViewCheckBoxColumn";
-			this.useAutoConfigureScriptDataGridViewCheckBoxColumn.ReadOnly = true;
-			this.useAutoConfigureScriptDataGridViewCheckBoxColumn.Visible = false;
-			// 
-			// useAutoConfigureScriptAddressDataGridViewTextBoxColumn
-			// 
-			this.useAutoConfigureScriptAddressDataGridViewTextBoxColumn.DataPropertyName = "UseAutoConfigureScriptAddress";
-			this.useAutoConfigureScriptAddressDataGridViewTextBoxColumn.HeaderText = "UseAutoConfigureScriptAddress";
-			this.useAutoConfigureScriptAddressDataGridViewTextBoxColumn.Name = "useAutoConfigureScriptAddressDataGridViewTextBoxColumn";
-			this.useAutoConfigureScriptAddressDataGridViewTextBoxColumn.ReadOnly = true;
-			this.useAutoConfigureScriptAddressDataGridViewTextBoxColumn.Visible = false;
-			// 
-			// useProxyServerDataGridViewCheckBoxColumn
-			// 
-			this.useProxyServerDataGridViewCheckBoxColumn.DataPropertyName = "UseProxyServer";
-			this.useProxyServerDataGridViewCheckBoxColumn.HeaderText = "UseProxyServer";
-			this.useProxyServerDataGridViewCheckBoxColumn.Name = "useProxyServerDataGridViewCheckBoxColumn";
-			this.useProxyServerDataGridViewCheckBoxColumn.ReadOnly = true;
-			this.useProxyServerDataGridViewCheckBoxColumn.Visible = false;
-			// 
-			// bypassProxyForLocalAddressDataGridViewCheckBoxColumn
-			// 
-			this.bypassProxyForLocalAddressDataGridViewCheckBoxColumn.DataPropertyName = "BypassProxyForLocalAddress";
-			this.bypassProxyForLocalAddressDataGridViewCheckBoxColumn.HeaderText = "BypassProxyForLocalAddress";
-			this.bypassProxyForLocalAddressDataGridViewCheckBoxColumn.Name = "bypassProxyForLocalAddressDataGridViewCheckBoxColumn";
-			this.bypassProxyForLocalAddressDataGridViewCheckBoxColumn.ReadOnly = true;
-			this.bypassProxyForLocalAddressDataGridViewCheckBoxColumn.Visible = false;
-			// 
-			// useProxyServerAddressDataGridViewTextBoxColumn
-			// 
-			this.useProxyServerAddressDataGridViewTextBoxColumn.DataPropertyName = "UseProxyServerAddress";
-			this.useProxyServerAddressDataGridViewTextBoxColumn.HeaderText = "UseProxyServerAddress";
-			this.useProxyServerAddressDataGridViewTextBoxColumn.Name = "useProxyServerAddressDataGridViewTextBoxColumn";
-			this.useProxyServerAddressDataGridViewTextBoxColumn.ReadOnly = true;
-			this.useProxyServerAddressDataGridViewTextBoxColumn.Visible = false;
-			// 
-			// useProxyServerPortDataGridViewTextBoxColumn
-			// 
-			this.useProxyServerPortDataGridViewTextBoxColumn.DataPropertyName = "UseProxyServerPort";
-			this.useProxyServerPortDataGridViewTextBoxColumn.HeaderText = "UseProxyServerPort";
-			this.useProxyServerPortDataGridViewTextBoxColumn.Name = "useProxyServerPortDataGridViewTextBoxColumn";
-			this.useProxyServerPortDataGridViewTextBoxColumn.ReadOnly = true;
-			this.useProxyServerPortDataGridViewTextBoxColumn.Visible = false;
-			// 
-			// hTTPProxyAddressDataGridViewTextBoxColumn
-			// 
-			this.hTTPProxyAddressDataGridViewTextBoxColumn.DataPropertyName = "HTTPProxyAddress";
-			this.hTTPProxyAddressDataGridViewTextBoxColumn.HeaderText = "HTTPProxyAddress";
-			this.hTTPProxyAddressDataGridViewTextBoxColumn.Name = "hTTPProxyAddressDataGridViewTextBoxColumn";
-			this.hTTPProxyAddressDataGridViewTextBoxColumn.ReadOnly = true;
-			this.hTTPProxyAddressDataGridViewTextBoxColumn.Visible = false;
-			// 
-			// hTTPProxyPortDataGridViewTextBoxColumn
-			// 
-			this.hTTPProxyPortDataGridViewTextBoxColumn.DataPropertyName = "HTTPProxyPort";
-			this.hTTPProxyPortDataGridViewTextBoxColumn.HeaderText = "HTTPProxyPort";
-			this.hTTPProxyPortDataGridViewTextBoxColumn.Name = "hTTPProxyPortDataGridViewTextBoxColumn";
-			this.hTTPProxyPortDataGridViewTextBoxColumn.ReadOnly = true;
-			this.hTTPProxyPortDataGridViewTextBoxColumn.Visible = false;
-			// 
-			// secureProxyAddressDataGridViewTextBoxColumn
-			// 
-			this.secureProxyAddressDataGridViewTextBoxColumn.DataPropertyName = "SecureProxyAddress";
-			this.secureProxyAddressDataGridViewTextBoxColumn.HeaderText = "SecureProxyAddress";
-			this.secureProxyAddressDataGridViewTextBoxColumn.Name = "secureProxyAddressDataGridViewTextBoxColumn";
-			this.secureProxyAddressDataGridViewTextBoxColumn.ReadOnly = true;
-			this.secureProxyAddressDataGridViewTextBoxColumn.Visible = false;
-			// 
-			// secureProxyPortDataGridViewTextBoxColumn
-			// 
-			this.secureProxyPortDataGridViewTextBoxColumn.DataPropertyName = "SecureProxyPort";
-			this.secureProxyPortDataGridViewTextBoxColumn.HeaderText = "SecureProxyPort";
-			this.secureProxyPortDataGridViewTextBoxColumn.Name = "secureProxyPortDataGridViewTextBoxColumn";
-			this.secureProxyPortDataGridViewTextBoxColumn.ReadOnly = true;
-			this.secureProxyPortDataGridViewTextBoxColumn.Visible = false;
-			// 
-			// fTPProxyAddressDataGridViewTextBoxColumn
-			// 
-			this.fTPProxyAddressDataGridViewTextBoxColumn.DataPropertyName = "FTPProxyAddress";
-			this.fTPProxyAddressDataGridViewTextBoxColumn.HeaderText = "FTPProxyAddress";
-			this.fTPProxyAddressDataGridViewTextBoxColumn.Name = "fTPProxyAddressDataGridViewTextBoxColumn";
-			this.fTPProxyAddressDataGridViewTextBoxColumn.ReadOnly = true;
-			this.fTPProxyAddressDataGridViewTextBoxColumn.Visible = false;
-			// 
-			// fTPProxyPortDataGridViewTextBoxColumn
-			// 
-			this.fTPProxyPortDataGridViewTextBoxColumn.DataPropertyName = "FTPProxyPort";
-			this.fTPProxyPortDataGridViewTextBoxColumn.HeaderText = "FTPProxyPort";
-			this.fTPProxyPortDataGridViewTextBoxColumn.Name = "fTPProxyPortDataGridViewTextBoxColumn";
-			this.fTPProxyPortDataGridViewTextBoxColumn.ReadOnly = true;
-			this.fTPProxyPortDataGridViewTextBoxColumn.Visible = false;
-			// 
-			// gopherProxyAddressDataGridViewTextBoxColumn
-			// 
-			this.gopherProxyAddressDataGridViewTextBoxColumn.DataPropertyName = "GopherProxyAddress";
-			this.gopherProxyAddressDataGridViewTextBoxColumn.HeaderText = "GopherProxyAddress";
-			this.gopherProxyAddressDataGridViewTextBoxColumn.Name = "gopherProxyAddressDataGridViewTextBoxColumn";
-			this.gopherProxyAddressDataGridViewTextBoxColumn.ReadOnly = true;
-			this.gopherProxyAddressDataGridViewTextBoxColumn.Visible = false;
-			// 
-			// gopherProxyPortDataGridViewTextBoxColumn
-			// 
-			this.gopherProxyPortDataGridViewTextBoxColumn.DataPropertyName = "GopherProxyPort";
-			this.gopherProxyPortDataGridViewTextBoxColumn.HeaderText = "GopherProxyPort";
-			this.gopherProxyPortDataGridViewTextBoxColumn.Name = "gopherProxyPortDataGridViewTextBoxColumn";
-			this.gopherProxyPortDataGridViewTextBoxColumn.ReadOnly = true;
-			this.gopherProxyPortDataGridViewTextBoxColumn.Visible = false;
-			// 
-			// socksProxyAddressDataGridViewTextBoxColumn
-			// 
-			this.socksProxyAddressDataGridViewTextBoxColumn.DataPropertyName = "SocksProxyAddress";
-			this.socksProxyAddressDataGridViewTextBoxColumn.HeaderText = "SocksProxyAddress";
-			this.socksProxyAddressDataGridViewTextBoxColumn.Name = "socksProxyAddressDataGridViewTextBoxColumn";
-			this.socksProxyAddressDataGridViewTextBoxColumn.ReadOnly = true;
-			this.socksProxyAddressDataGridViewTextBoxColumn.Visible = false;
-			// 
-			// socksProxyPortDataGridViewTextBoxColumn
-			// 
-			this.socksProxyPortDataGridViewTextBoxColumn.DataPropertyName = "SocksProxyPort";
-			this.socksProxyPortDataGridViewTextBoxColumn.HeaderText = "SocksProxyPort";
-			this.socksProxyPortDataGridViewTextBoxColumn.Name = "socksProxyPortDataGridViewTextBoxColumn";
-			this.socksProxyPortDataGridViewTextBoxColumn.ReadOnly = true;
-			this.socksProxyPortDataGridViewTextBoxColumn.Visible = false;
-			// 
-			// useSameProxyServerForAllProtocolsDataGridViewCheckBoxColumn
-			// 
-			this.useSameProxyServerForAllProtocolsDataGridViewCheckBoxColumn.DataPropertyName = "UseSameProxyServerForAllProtocols";
-			this.useSameProxyServerForAllProtocolsDataGridViewCheckBoxColumn.HeaderText = "UseSameProxyServerForAllProtocols";
-			this.useSameProxyServerForAllProtocolsDataGridViewCheckBoxColumn.Name = "useSameProxyServerForAllProtocolsDataGridViewCheckBoxColumn";
-			this.useSameProxyServerForAllProtocolsDataGridViewCheckBoxColumn.ReadOnly = true;
-			this.useSameProxyServerForAllProtocolsDataGridViewCheckBoxColumn.Visible = false;
-			// 
-			// excludeAddressesFromProxyDataGridViewTextBoxColumn
-			// 
-			this.excludeAddressesFromProxyDataGridViewTextBoxColumn.DataPropertyName = "ExcludeAddressesFromProxy";
-			this.excludeAddressesFromProxyDataGridViewTextBoxColumn.HeaderText = "ExcludeAddressesFromProxy";
-			this.excludeAddressesFromProxyDataGridViewTextBoxColumn.Name = "excludeAddressesFromProxyDataGridViewTextBoxColumn";
-			this.excludeAddressesFromProxyDataGridViewTextBoxColumn.ReadOnly = true;
-			this.excludeAddressesFromProxyDataGridViewTextBoxColumn.Visible = false;
-			// 
-			// proxyBindingSource
-			// 
-			this.proxyBindingSource.DataSource = typeof(Fleischmann.AdvancedProxy.ProxySetting);
 			// 
 			// icnProxyNotifyIcon
 			// 
@@ -515,6 +360,11 @@ namespace Fleischmann.AdvancedProxy
 			this.refreshIconTimer.Interval = 1000;
 			this.refreshIconTimer.Tick += new System.EventHandler(this.refreshIconTimer_Tick);
 			// 
+			// saveFileDialog
+			// 
+			this.saveFileDialog.FileName = "ProxyList.pxy";
+			this.saveFileDialog.InitialDirectory = "My Documents";
+			// 
 			// menuStrip1
 			// 
 			this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -529,7 +379,7 @@ namespace Fleischmann.AdvancedProxy
 			// fileToolStripMenuItem
 			// 
 			this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.impoToolStripMenuItem,
+            this.importToolStripMenuItem,
             this.exportToolStripMenuItem,
             this.toolStripSeparator4,
             this.exitToolStripMenuItem1});
@@ -537,27 +387,29 @@ namespace Fleischmann.AdvancedProxy
 			this.fileToolStripMenuItem.Size = new System.Drawing.Size(35, 20);
 			this.fileToolStripMenuItem.Text = "&File";
 			// 
-			// impoToolStripMenuItem
+			// importToolStripMenuItem
 			// 
-			this.impoToolStripMenuItem.Name = "impoToolStripMenuItem";
-			this.impoToolStripMenuItem.Size = new System.Drawing.Size(106, 22);
-			this.impoToolStripMenuItem.Text = "&Import";
+			this.importToolStripMenuItem.Name = "importToolStripMenuItem";
+			this.importToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.importToolStripMenuItem.Text = "&Import";
+			this.importToolStripMenuItem.Click += new System.EventHandler(this.importToolStripMenuItem_Click);
 			// 
 			// exportToolStripMenuItem
 			// 
 			this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
-			this.exportToolStripMenuItem.Size = new System.Drawing.Size(106, 22);
+			this.exportToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
 			this.exportToolStripMenuItem.Text = "&Export";
+			this.exportToolStripMenuItem.Click += new System.EventHandler(this.exportToolStripMenuItem_Click);
 			// 
 			// toolStripSeparator4
 			// 
 			this.toolStripSeparator4.Name = "toolStripSeparator4";
-			this.toolStripSeparator4.Size = new System.Drawing.Size(103, 6);
+			this.toolStripSeparator4.Size = new System.Drawing.Size(149, 6);
 			// 
 			// exitToolStripMenuItem1
 			// 
 			this.exitToolStripMenuItem1.Name = "exitToolStripMenuItem1";
-			this.exitToolStripMenuItem1.Size = new System.Drawing.Size(106, 22);
+			this.exitToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
 			this.exitToolStripMenuItem1.Text = "E&xit";
 			this.exitToolStripMenuItem1.Click += new System.EventHandler(this.btnExit_Click);
 			// 
@@ -577,35 +429,43 @@ namespace Fleischmann.AdvancedProxy
 			// addToolStripMenuItem
 			// 
 			this.addToolStripMenuItem.Name = "addToolStripMenuItem";
-			this.addToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.addToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
 			this.addToolStripMenuItem.Text = "&Add";
 			this.addToolStripMenuItem.Click += new System.EventHandler(this.btnAdd_Click);
 			// 
 			// editToolStripMenuItem
 			// 
 			this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-			this.editToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.editToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
 			this.editToolStripMenuItem.Text = "&Edit";
 			this.editToolStripMenuItem.Click += new System.EventHandler(this.btnEdit_Click);
 			// 
 			// deleteToolStripMenuItem
 			// 
 			this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-			this.deleteToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.deleteToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
 			this.deleteToolStripMenuItem.Text = "&Delete";
 			this.deleteToolStripMenuItem.Click += new System.EventHandler(this.btnDelete_Click);
 			// 
 			// toolStripSeparator5
 			// 
 			this.toolStripSeparator5.Name = "toolStripSeparator5";
-			this.toolStripSeparator5.Size = new System.Drawing.Size(149, 6);
+			this.toolStripSeparator5.Size = new System.Drawing.Size(154, 6);
 			// 
 			// setAsCurrentToolStripMenuItem
 			// 
 			this.setAsCurrentToolStripMenuItem.Name = "setAsCurrentToolStripMenuItem";
-			this.setAsCurrentToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.setAsCurrentToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
 			this.setAsCurrentToolStripMenuItem.Text = "Set as Current";
 			this.setAsCurrentToolStripMenuItem.Click += new System.EventHandler(this.btnSetAsCurrent_Click);
+			// 
+			// captureCurrentIESettingsToolStripMenuItem
+			// 
+			this.captureCurrentIESettingsToolStripMenuItem.Name = "captureCurrentIESettingsToolStripMenuItem";
+			this.captureCurrentIESettingsToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
+			this.captureCurrentIESettingsToolStripMenuItem.Text = "Capture IE Proxy";
+			this.captureCurrentIESettingsToolStripMenuItem.ToolTipText = "Captures the current proxy settings in IE and creates a new Proxy Setting.";
+			this.captureCurrentIESettingsToolStripMenuItem.Click += new System.EventHandler(this.captureCurrentIESettingsToolStripMenuItem_Click);
 			// 
 			// MenuProxySettingRightClick
 			// 
@@ -647,13 +507,168 @@ namespace Fleischmann.AdvancedProxy
 			this.setAsCurrentToolStripMenuItem1.Text = "&Set as Current";
 			this.setAsCurrentToolStripMenuItem1.Click += new System.EventHandler(this.btnSetAsCurrent_Click);
 			// 
-			// captureCurrentIESettingsToolStripMenuItem
+			// openFileDialog
 			// 
-			this.captureCurrentIESettingsToolStripMenuItem.Name = "captureCurrentIESettingsToolStripMenuItem";
-			this.captureCurrentIESettingsToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
-			this.captureCurrentIESettingsToolStripMenuItem.Text = "Capture IE Proxy";
-			this.captureCurrentIESettingsToolStripMenuItem.ToolTipText = "Captures the current proxy settings in IE and creates a new Proxy Setting.";
-			this.captureCurrentIESettingsToolStripMenuItem.Click += new System.EventHandler(this.captureCurrentIESettingsToolStripMenuItem_Click);
+			this.openFileDialog.DefaultExt = "*.pxy";
+			this.openFileDialog.FileName = "ProxyList.pxy";
+			this.openFileDialog.Filter = "Proxy Files|*.pxy|All Files|*.*";
+			this.openFileDialog.InitialDirectory = "My Documents";
+			// 
+			// autoDetectSettingsDataGridViewCheckBoxColumn
+			// 
+			this.autoDetectSettingsDataGridViewCheckBoxColumn.DataPropertyName = "AutoDetectSettings";
+			this.autoDetectSettingsDataGridViewCheckBoxColumn.HeaderText = "AutoDetectSettings";
+			this.autoDetectSettingsDataGridViewCheckBoxColumn.Name = "autoDetectSettingsDataGridViewCheckBoxColumn";
+			this.autoDetectSettingsDataGridViewCheckBoxColumn.ReadOnly = true;
+			this.autoDetectSettingsDataGridViewCheckBoxColumn.Visible = false;
+			// 
+			// useAutoConfigureScriptDataGridViewCheckBoxColumn
+			// 
+			this.useAutoConfigureScriptDataGridViewCheckBoxColumn.DataPropertyName = "UseAutoConfigureScript";
+			this.useAutoConfigureScriptDataGridViewCheckBoxColumn.HeaderText = "UseAutoConfigureScript";
+			this.useAutoConfigureScriptDataGridViewCheckBoxColumn.Name = "useAutoConfigureScriptDataGridViewCheckBoxColumn";
+			this.useAutoConfigureScriptDataGridViewCheckBoxColumn.ReadOnly = true;
+			this.useAutoConfigureScriptDataGridViewCheckBoxColumn.Visible = false;
+			// 
+			// useAutoConfigureScriptAddressDataGridViewTextBoxColumn
+			// 
+			this.useAutoConfigureScriptAddressDataGridViewTextBoxColumn.DataPropertyName = "UseAutoConfigureScriptAddress";
+			this.useAutoConfigureScriptAddressDataGridViewTextBoxColumn.HeaderText = "UseAutoConfigureScriptAddress";
+			this.useAutoConfigureScriptAddressDataGridViewTextBoxColumn.Name = "useAutoConfigureScriptAddressDataGridViewTextBoxColumn";
+			this.useAutoConfigureScriptAddressDataGridViewTextBoxColumn.ReadOnly = true;
+			this.useAutoConfigureScriptAddressDataGridViewTextBoxColumn.Visible = false;
+			// 
+			// useProxyServerDataGridViewCheckBoxColumn
+			// 
+			this.useProxyServerDataGridViewCheckBoxColumn.DataPropertyName = "UseProxyServer";
+			this.useProxyServerDataGridViewCheckBoxColumn.HeaderText = "UseProxyServer";
+			this.useProxyServerDataGridViewCheckBoxColumn.Name = "useProxyServerDataGridViewCheckBoxColumn";
+			this.useProxyServerDataGridViewCheckBoxColumn.ReadOnly = true;
+			this.useProxyServerDataGridViewCheckBoxColumn.Visible = false;
+			// 
+			// bypassProxyForLocalAddressDataGridViewCheckBoxColumn
+			// 
+			this.bypassProxyForLocalAddressDataGridViewCheckBoxColumn.DataPropertyName = "BypassProxyForLocalAddress";
+			this.bypassProxyForLocalAddressDataGridViewCheckBoxColumn.HeaderText = "BypassProxyForLocalAddress";
+			this.bypassProxyForLocalAddressDataGridViewCheckBoxColumn.Name = "bypassProxyForLocalAddressDataGridViewCheckBoxColumn";
+			this.bypassProxyForLocalAddressDataGridViewCheckBoxColumn.ReadOnly = true;
+			this.bypassProxyForLocalAddressDataGridViewCheckBoxColumn.Visible = false;
+			// 
+			// useProxyServerAddressDataGridViewTextBoxColumn
+			// 
+			this.useProxyServerAddressDataGridViewTextBoxColumn.DataPropertyName = "UseProxyServerAddress";
+			this.useProxyServerAddressDataGridViewTextBoxColumn.HeaderText = "UseProxyServerAddress";
+			this.useProxyServerAddressDataGridViewTextBoxColumn.Name = "useProxyServerAddressDataGridViewTextBoxColumn";
+			this.useProxyServerAddressDataGridViewTextBoxColumn.ReadOnly = true;
+			this.useProxyServerAddressDataGridViewTextBoxColumn.Visible = false;
+			// 
+			// useProxyServerPortDataGridViewTextBoxColumn
+			// 
+			this.useProxyServerPortDataGridViewTextBoxColumn.DataPropertyName = "UseProxyServerPort";
+			this.useProxyServerPortDataGridViewTextBoxColumn.HeaderText = "UseProxyServerPort";
+			this.useProxyServerPortDataGridViewTextBoxColumn.Name = "useProxyServerPortDataGridViewTextBoxColumn";
+			this.useProxyServerPortDataGridViewTextBoxColumn.ReadOnly = true;
+			this.useProxyServerPortDataGridViewTextBoxColumn.Visible = false;
+			// 
+			// hTTPProxyAddressDataGridViewTextBoxColumn
+			// 
+			this.hTTPProxyAddressDataGridViewTextBoxColumn.DataPropertyName = "HTTPProxyAddress";
+			this.hTTPProxyAddressDataGridViewTextBoxColumn.HeaderText = "HTTPProxyAddress";
+			this.hTTPProxyAddressDataGridViewTextBoxColumn.Name = "hTTPProxyAddressDataGridViewTextBoxColumn";
+			this.hTTPProxyAddressDataGridViewTextBoxColumn.ReadOnly = true;
+			this.hTTPProxyAddressDataGridViewTextBoxColumn.Visible = false;
+			// 
+			// hTTPProxyPortDataGridViewTextBoxColumn
+			// 
+			this.hTTPProxyPortDataGridViewTextBoxColumn.DataPropertyName = "HTTPProxyPort";
+			this.hTTPProxyPortDataGridViewTextBoxColumn.HeaderText = "HTTPProxyPort";
+			this.hTTPProxyPortDataGridViewTextBoxColumn.Name = "hTTPProxyPortDataGridViewTextBoxColumn";
+			this.hTTPProxyPortDataGridViewTextBoxColumn.ReadOnly = true;
+			this.hTTPProxyPortDataGridViewTextBoxColumn.Visible = false;
+			// 
+			// secureProxyAddressDataGridViewTextBoxColumn
+			// 
+			this.secureProxyAddressDataGridViewTextBoxColumn.DataPropertyName = "SecureProxyAddress";
+			this.secureProxyAddressDataGridViewTextBoxColumn.HeaderText = "SecureProxyAddress";
+			this.secureProxyAddressDataGridViewTextBoxColumn.Name = "secureProxyAddressDataGridViewTextBoxColumn";
+			this.secureProxyAddressDataGridViewTextBoxColumn.ReadOnly = true;
+			this.secureProxyAddressDataGridViewTextBoxColumn.Visible = false;
+			// 
+			// secureProxyPortDataGridViewTextBoxColumn
+			// 
+			this.secureProxyPortDataGridViewTextBoxColumn.DataPropertyName = "SecureProxyPort";
+			this.secureProxyPortDataGridViewTextBoxColumn.HeaderText = "SecureProxyPort";
+			this.secureProxyPortDataGridViewTextBoxColumn.Name = "secureProxyPortDataGridViewTextBoxColumn";
+			this.secureProxyPortDataGridViewTextBoxColumn.ReadOnly = true;
+			this.secureProxyPortDataGridViewTextBoxColumn.Visible = false;
+			// 
+			// fTPProxyAddressDataGridViewTextBoxColumn
+			// 
+			this.fTPProxyAddressDataGridViewTextBoxColumn.DataPropertyName = "FTPProxyAddress";
+			this.fTPProxyAddressDataGridViewTextBoxColumn.HeaderText = "FTPProxyAddress";
+			this.fTPProxyAddressDataGridViewTextBoxColumn.Name = "fTPProxyAddressDataGridViewTextBoxColumn";
+			this.fTPProxyAddressDataGridViewTextBoxColumn.ReadOnly = true;
+			this.fTPProxyAddressDataGridViewTextBoxColumn.Visible = false;
+			// 
+			// fTPProxyPortDataGridViewTextBoxColumn
+			// 
+			this.fTPProxyPortDataGridViewTextBoxColumn.DataPropertyName = "FTPProxyPort";
+			this.fTPProxyPortDataGridViewTextBoxColumn.HeaderText = "FTPProxyPort";
+			this.fTPProxyPortDataGridViewTextBoxColumn.Name = "fTPProxyPortDataGridViewTextBoxColumn";
+			this.fTPProxyPortDataGridViewTextBoxColumn.ReadOnly = true;
+			this.fTPProxyPortDataGridViewTextBoxColumn.Visible = false;
+			// 
+			// gopherProxyAddressDataGridViewTextBoxColumn
+			// 
+			this.gopherProxyAddressDataGridViewTextBoxColumn.DataPropertyName = "GopherProxyAddress";
+			this.gopherProxyAddressDataGridViewTextBoxColumn.HeaderText = "GopherProxyAddress";
+			this.gopherProxyAddressDataGridViewTextBoxColumn.Name = "gopherProxyAddressDataGridViewTextBoxColumn";
+			this.gopherProxyAddressDataGridViewTextBoxColumn.ReadOnly = true;
+			this.gopherProxyAddressDataGridViewTextBoxColumn.Visible = false;
+			// 
+			// gopherProxyPortDataGridViewTextBoxColumn
+			// 
+			this.gopherProxyPortDataGridViewTextBoxColumn.DataPropertyName = "GopherProxyPort";
+			this.gopherProxyPortDataGridViewTextBoxColumn.HeaderText = "GopherProxyPort";
+			this.gopherProxyPortDataGridViewTextBoxColumn.Name = "gopherProxyPortDataGridViewTextBoxColumn";
+			this.gopherProxyPortDataGridViewTextBoxColumn.ReadOnly = true;
+			this.gopherProxyPortDataGridViewTextBoxColumn.Visible = false;
+			// 
+			// socksProxyAddressDataGridViewTextBoxColumn
+			// 
+			this.socksProxyAddressDataGridViewTextBoxColumn.DataPropertyName = "SocksProxyAddress";
+			this.socksProxyAddressDataGridViewTextBoxColumn.HeaderText = "SocksProxyAddress";
+			this.socksProxyAddressDataGridViewTextBoxColumn.Name = "socksProxyAddressDataGridViewTextBoxColumn";
+			this.socksProxyAddressDataGridViewTextBoxColumn.ReadOnly = true;
+			this.socksProxyAddressDataGridViewTextBoxColumn.Visible = false;
+			// 
+			// socksProxyPortDataGridViewTextBoxColumn
+			// 
+			this.socksProxyPortDataGridViewTextBoxColumn.DataPropertyName = "SocksProxyPort";
+			this.socksProxyPortDataGridViewTextBoxColumn.HeaderText = "SocksProxyPort";
+			this.socksProxyPortDataGridViewTextBoxColumn.Name = "socksProxyPortDataGridViewTextBoxColumn";
+			this.socksProxyPortDataGridViewTextBoxColumn.ReadOnly = true;
+			this.socksProxyPortDataGridViewTextBoxColumn.Visible = false;
+			// 
+			// useSameProxyServerForAllProtocolsDataGridViewCheckBoxColumn
+			// 
+			this.useSameProxyServerForAllProtocolsDataGridViewCheckBoxColumn.DataPropertyName = "UseSameProxyServerForAllProtocols";
+			this.useSameProxyServerForAllProtocolsDataGridViewCheckBoxColumn.HeaderText = "UseSameProxyServerForAllProtocols";
+			this.useSameProxyServerForAllProtocolsDataGridViewCheckBoxColumn.Name = "useSameProxyServerForAllProtocolsDataGridViewCheckBoxColumn";
+			this.useSameProxyServerForAllProtocolsDataGridViewCheckBoxColumn.ReadOnly = true;
+			this.useSameProxyServerForAllProtocolsDataGridViewCheckBoxColumn.Visible = false;
+			// 
+			// excludeAddressesFromProxyDataGridViewTextBoxColumn
+			// 
+			this.excludeAddressesFromProxyDataGridViewTextBoxColumn.DataPropertyName = "ExcludeAddressesFromProxy";
+			this.excludeAddressesFromProxyDataGridViewTextBoxColumn.HeaderText = "ExcludeAddressesFromProxy";
+			this.excludeAddressesFromProxyDataGridViewTextBoxColumn.Name = "excludeAddressesFromProxyDataGridViewTextBoxColumn";
+			this.excludeAddressesFromProxyDataGridViewTextBoxColumn.ReadOnly = true;
+			this.excludeAddressesFromProxyDataGridViewTextBoxColumn.Visible = false;
+			// 
+			// proxyBindingSource
+			// 
+			this.proxyBindingSource.DataSource = typeof(Fleischmann.AdvancedProxy.ProxySetting);
 			// 
 			// MainForm
 			// 
@@ -677,11 +692,11 @@ namespace Fleischmann.AdvancedProxy
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
 			this.Load += new System.EventHandler(this.MainForm_Load);
 			((System.ComponentModel.ISupportInitialize)(this.gridProxySettings)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.proxyBindingSource)).EndInit();
 			this.cxmNotifyIconMenu.ResumeLayout(false);
 			this.menuStrip1.ResumeLayout(false);
 			this.menuStrip1.PerformLayout();
 			this.MenuProxySettingRightClick.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.proxyBindingSource)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -714,7 +729,7 @@ namespace Fleischmann.AdvancedProxy
 		private System.Windows.Forms.SaveFileDialog saveFileDialog;
 		private System.Windows.Forms.MenuStrip menuStrip1;
 		private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem impoToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem importToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem exportToolStripMenuItem;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
 		private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem1;
@@ -751,6 +766,7 @@ namespace Fleischmann.AdvancedProxy
 		private System.Windows.Forms.DataGridViewCheckBoxColumn useSameProxyServerForAllProtocolsDataGridViewCheckBoxColumn;
 		private System.Windows.Forms.DataGridViewTextBoxColumn excludeAddressesFromProxyDataGridViewTextBoxColumn;
 		private System.Windows.Forms.ToolStripMenuItem captureCurrentIESettingsToolStripMenuItem;
+		private System.Windows.Forms.OpenFileDialog openFileDialog;
 
 	}
 }
