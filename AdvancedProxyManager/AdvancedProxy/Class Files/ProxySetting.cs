@@ -17,7 +17,7 @@ using Fleischmann.AdvancedProxy.ProxyConfiguration;
 namespace Fleischmann.AdvancedProxy
 {
 	/// <summary>
-	/// Copyright karl fleischmann 2006-2007
+	/// Copyright karl fleischmann 2006-2009
 	/// </summary>
 	[Serializable]
 	public class ProxySetting

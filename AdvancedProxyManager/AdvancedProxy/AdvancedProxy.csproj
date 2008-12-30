@@ -13,8 +13,26 @@
     <SccLocalPath>SAK</SccLocalPath>
     <SccAuxPath>SAK</SccAuxPath>
     <SccProvider>SAK</SccProvider>
-    <ApplicationIcon>
-    </ApplicationIcon>
+    <ApplicationIcon>Resources\Enabled.ico</ApplicationIcon>
+    <ManifestCertificateThumbprint>7854BD63B1DF447E6DD42EB352517A0E610F6F13</ManifestCertificateThumbprint>
+    <ManifestKeyFile>AdvancedProxy_TemporaryKey.pfx</ManifestKeyFile>
+    <GenerateManifests>true</GenerateManifests>
+    <SignManifests>true</SignManifests>
+    <PublishUrl>http://localhost/AdvancedProxyManager/</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Web</InstallFrom>
+    <UpdateEnabled>true</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ProductName>Advanced Proxy Manager</ProductName>
+    <PublisherName>Karl Fleischmann</PublisherName>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>true</IsWebBootstrapper>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -51,11 +69,7 @@
     <Compile Include="Class Files\Configuration\ProxyURLCollection.cs" />
     <Compile Include="Class Files\Utility\SortableBindingList.cs" />
     <Compile Include="Class Files\Utility\WinInetInterop.cs" />
-    <Compile Include="Resource.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resource.resx</DependentUpon>
-    </Compile>
+    <Compile Include="Settings.cs" />
     <Compile Include="User Interface\AdvancedDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -94,11 +108,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Resource.resx">
-      <SubType>Designer</SubType>
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resource.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
     <EmbeddedResource Include="User Interface\AdvancedDialog.resx">
       <SubType>Designer</SubType>
       <DependentUpon>AdvancedDialog.cs</DependentUpon>
@@ -137,6 +146,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="AdvancedProxy_TemporaryKey.pfx" />
     <None Include="App.config">
     </None>
     <None Include="ClassDiagram.cd" />
@@ -158,6 +168,19 @@
     <Compile Include="User Interface\ProxyNamePromptDialog.designer.cs">
       <DependentUpon>ProxyNamePromptDialog.cs</DependentUpon>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Enabled.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Disabled.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

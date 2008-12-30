@@ -15,17 +15,18 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using System.Deployment.Application;
 
 namespace Fleischmann.AdvancedProxy
 {
 	/// <summary>
-	/// Copyright karl fleischmann 2006-2007
+	/// Copyright karl fleischmann 2006-2009
 	/// </summary>
 	public partial class MainForm : Form
 	{
 		#region Private Fields
-		private Icon enabledIcon = Resource.Enabled; //new Icon(Application.StartupPath + "\\icons\\Enabled.ico");
-        private Icon disabledIcon = Resource.Disabled; //new Icon(Application.StartupPath + "\\Disabled.ico");
+		private Icon enabledIcon = Properties.Resources.Enabled; //new Icon(Application.StartupPath + "\\icons\\Enabled.ico");
+        private Icon disabledIcon = Properties.Resources.Disabled; //new Icon(Application.StartupPath + "\\Disabled.ico");
 
 		private const string BaseAutoRunKey = "Software\\Microsoft\\Windows\\CurrentVersion\\Run";
 
@@ -57,6 +58,9 @@ namespace Fleischmann.AdvancedProxy
 			SystemEvents.PowerModeChanged += new PowerModeChangedEventHandler(SystemEvents_PowerModeChanged);
 
 			icnProxyNotifyIcon.ShowBalloonTip(1); // when first opening display a balloon tip.
+
+            checkForUpdatesToolStripMenuItem.Visible = ApplicationDeployment.IsNetworkDeployed;
+         
 		} 
 		#endregion
 
@@ -119,7 +123,7 @@ namespace Fleischmann.AdvancedProxy
 			if (e.Mode == PowerModes.Resume)
 			{
 				RefreshTrayIcon();
-				icnProxyNotifyIcon.ShowBalloonTip(10);
+//				icnProxyNotifyIcon.ShowBalloonTip(10);
 			}
 		} 
 		#endregion
@@ -527,6 +531,78 @@ namespace Fleischmann.AdvancedProxy
 
 
 		}
+
+        private void checkForUpdatesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            UpdateCheckInfo info = null;
+
+            if (ApplicationDeployment.IsNetworkDeployed)
+            {
+                ApplicationDeployment ad = ApplicationDeployment.CurrentDeployment;
+
+                try
+                {
+                    info = ad.CheckForDetailedUpdate();
+
+                }
+                catch (DeploymentDownloadException dde)
+                {
+                    MessageBox.Show("The new version of the application cannot be downloaded at this time. \n\nPlease check your network connection, or try again later. Error: " + dde.Message);
+                    return;
+                }
+                catch (InvalidDeploymentException ide)
+                {
+                    MessageBox.Show("Cannot check for a new version of the application. The ClickOnce deployment is corrupt. Please redeploy the application and try again. Error: " + ide.Message);
+                    return;
+                }
+                catch (InvalidOperationException ioe)
+                {
+                    MessageBox.Show("This application cannot be updated. It is likely not a ClickOnce application. Error: " + ioe.Message);
+                    return;
+                }
+
+                if (!info.UpdateAvailable)
+                {
+                    MessageBox.Show("There are no updates available at this time.");
+                    return;
+                }
+
+                Boolean doUpdate = true;
+
+                if (!info.IsUpdateRequired)
+                {
+                    DialogResult dr = MessageBox.Show("An update is available. Would you like to update the application now?", "Update Available", MessageBoxButtons.YesNo);
+                    if (dr == DialogResult.No)
+                    {
+                        doUpdate = false;
+                    }
+                }
+                else
+                {
+                    // Display a message that the app MUST reboot. Display the minimum required version.
+                    MessageBox.Show("This application has detected a mandatory update from your current " +
+                        "version to version " + info.MinimumRequiredVersion.ToString() +
+                        ". The application will now install the update and restart.",
+                        "Update Available", MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
+                }
+
+                if (doUpdate)
+                {
+                    try
+                    {
+                        ad.Update();
+                        MessageBox.Show("The application has been upgraded, and will now restart.");
+                        Application.Restart();
+                    }
+                    catch (DeploymentDownloadException dde)
+                    {
+                        MessageBox.Show("Cannot install the latest version of the application. \n\nPlease check your network connection, or try again later. Error: " + dde);
+                        return;
+                    }
+                }
+            }
+        }
 
 	}
 }

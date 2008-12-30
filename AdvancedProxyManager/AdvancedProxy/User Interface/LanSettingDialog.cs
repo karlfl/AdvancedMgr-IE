@@ -9,7 +9,7 @@ using System.Windows.Forms;
 namespace Fleischmann.AdvancedProxy
 {
 	/// <summary>
-	/// Copyright karl fleischmann 2006-2007
+	/// Copyright karl fleischmann 2006-2009
 	/// </summary>
 	public partial class LanSettingDialog : Form
 	{

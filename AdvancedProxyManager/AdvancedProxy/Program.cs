@@ -11,7 +11,7 @@ namespace Fleischmann.AdvancedProxy
 	static class Program
 	{
 		/// <summary>
-		/// Copyright karl fleischmann 2006-2007
+		/// Copyright karl fleischmann 2006-2009
 		///
 		/// The main entry point for the application.
 		/// </summary>

@@ -2,22 +2,10 @@
 Microsoft Visual Studio Solution File, Format Version 9.00
 # Visual Studio 2005
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Advanced Proxy Manager Setup", "Advanced Proxy Setup\Advanced Proxy Setup.vdproj", "{E975D919-DF36-4832-AA80-E113387BFC99}"
-	ProjectSection(WebsiteProperties) = preProject
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.Debug = "False"
-	EndProjectSection
 EndProject
 Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "Advanced Proxy Installer", "Advanced Proxy Installer\Advanced Proxy Installer.wixproj", "{41E76195-F384-450F-8199-8375C8C18B7E}"
-	ProjectSection(WebsiteProperties) = preProject
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.Debug = "False"
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdvancedProxy", "AdvancedProxy\AdvancedProxy.csproj", "{D946F883-295B-4371-B022-42F72DB375F5}"
-	ProjectSection(WebsiteProperties) = preProject
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.Debug = "False"
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
